@@ -1,14 +1,17 @@
+import 'dart:async';
+
 import 'package:socket_io_client/socket_io_client.dart' as ws;
 
 class FibsConnection {
   final String proxy;
   final int port;
-  final void Function(String msg) onMessage;
+  final _controller = StreamController<String>();
   ws.Socket _socket;
   var _loggedIn = false;
-  FibsConnection(this.proxy, this.port, this.onMessage);
+  FibsConnection(this.proxy, this.port);
 
   bool get connected => _socket != null;
+  Stream<String> get stream => _controller.stream;
 
   void login(String user, String pass) {
     assert(!connected);
@@ -27,8 +30,10 @@ class FibsConnection {
       final s = String.fromCharCodes(bytes);
       if (!_loggedIn) {
         if (s.endsWith('login: ')) {
+          _receive('stream', s);
           send(user);
         } else if (s.endsWith('Password: ') /* JIBS */ || s.endsWith('password: ') /*FIBS*/) {
+          _receive('stream', s);
           send(pass);
           // TODO: what if it fails?
           // TODO: notify client
@@ -43,7 +48,6 @@ class FibsConnection {
 
     _socket.on('status', (status) {
       _receive('status', status);
-      print('"$status"');
       if (status == 'Telnet disconnected.\n') close();
     });
   }
@@ -55,16 +59,16 @@ class FibsConnection {
   }
 
   void _receive(String event, String message) {
-    print(message == null || message.isEmpty ? event : '$event: $message');
     // TODO: turn into cookie messages and notify the client
+    // print(message == null || message.isEmpty ? event : '$event: $message');
+    if (event == 'stream') _controller.add(message);
   }
 
   void close() {
-    print('close');
     assert(_socket != null);
     _socket.close();
     _socket = null;
-    // TODO: notify client
+    _controller.done;
   }
 }
 

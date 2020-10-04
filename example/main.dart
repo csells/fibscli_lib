@@ -8,8 +8,10 @@ void main() {
   final user = 'chris';
   final pass = 'chris1';
 
-  final conn = FibsConnection(proxy, port, (s) => print(s));
+  final conn = FibsConnection(proxy, port);
+  conn.stream.listen((s) => print(s));
   conn.login(user, pass);
+
   stdin.transform(utf8.decoder).transform(LineSplitter()).listen((cmd) {
     print('connected: ${conn.connected}');
     if (conn.connected) {
