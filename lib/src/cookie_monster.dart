@@ -230,8 +230,8 @@ class CookieMonster {
     CookieDough(
         cookie: FibsCookie.FIBS_PlayerMoves, regex: RegExp(r'^(?<player>[a-zA-Z_<>]+) moves (?<moves>[0-9- ]+)')),
     CookieDough(cookie: FibsCookie.FIBS_PlayerCantMove, regex: RegExp("^(?<player>[a-zA-Z_<>]+) can't move")),
-    CookieDough(cookie: FibsCookie.FIBS_BearingOff, regex: RegExp("^Bearing off: (?<bearing>.*)")),
-    CookieDough(cookie: FibsCookie.FIBS_YouReject, regex: RegExp("^You reject\\. The game continues\\.")),
+    CookieDough(cookie: FibsCookie.FIBS_BearingOff, regex: RegExp('^Bearing off: (?<bearing>.*)')),
+    CookieDough(cookie: FibsCookie.FIBS_YouReject, regex: RegExp('^You reject\\. The game continues\\.')),
     CookieDough(
         cookie: FibsCookie.FIBS_YouStopWatching,
         regex: RegExp(
@@ -239,21 +239,21 @@ class CookieMonster {
     CookieDough(
         cookie: FibsCookie.FIBS_OpponentLogsOut,
         regex: RegExp(
-            "^(?<opponent>[a-zA-Z_<>]+) logs out\\. The game was saved")), // PLAYER logs out. The game was saved.
+            '^(?<opponent>[a-zA-Z_<>]+) logs out\\. The game was saved')), // PLAYER logs out. The game was saved.
     CookieDough(
         cookie: FibsCookie.FIBS_OpponentLogsOut,
         regex: RegExp(
-            "^(?<opponent>[a-zA-Z_<>]+) drops connection\\. The game was saved")), // PLAYER drops connection. The game was saved.
-    CookieDough(cookie: FibsCookie.FIBS_OnlyPossibleMove, regex: RegExp("^The only possible move is (?<move>.*)")),
+            '^(?<opponent>[a-zA-Z_<>]+) drops connection\\. The game was saved')), // PLAYER drops connection. The game was saved.
+    CookieDough(cookie: FibsCookie.FIBS_OnlyPossibleMove, regex: RegExp('^The only possible move is (?<move>.*)')),
     CookieDough(
         cookie: FibsCookie.FIBS_FirstRoll,
-        regex: RegExp("(?<opponent>[a-zA-Z_<>]+) rolled (?<opponentDie>[1-6]).+rolled (?<yourDie>[1-6])")),
+        regex: RegExp('(?<opponent>[a-zA-Z_<>]+) rolled (?<opponentDie>[1-6]).+rolled (?<yourDie>[1-6])')),
     CookieDough(
-        cookie: FibsCookie.FIBS_MakesFirstMove, regex: RegExp("(?<opponent>[a-zA-Z_<>]+) makes the first move\\.")),
+        cookie: FibsCookie.FIBS_MakesFirstMove, regex: RegExp('(?<opponent>[a-zA-Z_<>]+) makes the first move\\.')),
     CookieDough(
         cookie: FibsCookie.FIBS_YouDouble,
         regex: RegExp(
-            "^You double\\. Please wait for (?<opponent>[a-zA-Z_<>]+) to accept or reject")), // You double. Please wait for PLAYER to accept or reject.
+            '^You double\\. Please wait for (?<opponent>[a-zA-Z_<>]+) to accept or reject')), // You double. Please wait for PLAYER to accept or reject.
     CookieDough(
         cookie: FibsCookie.FIBS_PlayerWantsToResign,
         regex: RegExp(
@@ -261,253 +261,253 @@ class CookieMonster {
     CookieDough(
         cookie: FibsCookie.FIBS_WatchResign,
         regex: RegExp(
-            "^(?<player1>[a-zA-Z_<>]+) wants to resign\\. (?<player2>[a-zA-Z_<>]+) will win (?<points>[0-9]+) points")), // PLAYER wants to resign. PLAYER2 will win 2 points.  (ORDER MATTERS HERE)
+            '^(?<player1>[a-zA-Z_<>]+) wants to resign\\. (?<player2>[a-zA-Z_<>]+) will win (?<points>[0-9]+) points')), // PLAYER wants to resign. PLAYER2 will win 2 points.  (ORDER MATTERS HERE)
     CookieDough(
         cookie: FibsCookie.FIBS_YouResign,
         regex: RegExp(
-            "^You want to resign. (?<opponent>[a-zA-Z_<>]+) will win (?<points>[0-9]+)")), // You want to resign. PLAYER will win 1 .
+            '^You want to resign. (?<opponent>[a-zA-Z_<>]+) will win (?<points>[0-9]+)')), // You want to resign. PLAYER will win 1 .
     CookieDough(
         cookie: FibsCookie.FIBS_ResumeMatchAck5,
-        regex: RegExp("^You are now playing with (?<opponent>[a-zA-Z_<>]+)\\. Your running match was loaded")),
+        regex: RegExp('^You are now playing with (?<opponent>[a-zA-Z_<>]+)\\. Your running match was loaded')),
     CookieDough(
         cookie: FibsCookie.FIBS_JoinNextGame,
         regex: RegExp("^Type 'join' if you want to play the next game, type 'leave' if you don't\\.")),
     CookieDough(
         cookie: FibsCookie.FIBS_NewMatchRequest,
-        regex: RegExp("^(?<name>[a-zA-Z_<>]+) wants to play a (?<points>[0-9]+) point match with you\\.")),
+        regex: RegExp('^(?<name>[a-zA-Z_<>]+) wants to play a (?<points>[0-9]+) point match with you\\.')),
     CookieDough(
         cookie: FibsCookie.FIBS_WARNINGSavedMatch, regex: RegExp("^WARNING: Don't accept if you want to continue")),
     CookieDough(
         cookie: FibsCookie.FIBS_ResignRefused,
-        regex: RegExp("^(?<opponent>[a-zA-Z_<>]+) rejects\\. The game continues\\.")),
-    CookieDough(cookie: FibsCookie.FIBS_MatchLength, regex: RegExp("^match length: (?<length>.*)")),
+        regex: RegExp('^(?<opponent>[a-zA-Z_<>]+) rejects\\. The game continues\\.')),
+    CookieDough(cookie: FibsCookie.FIBS_MatchLength, regex: RegExp('^match length: (?<length>.*)')),
     CookieDough(cookie: FibsCookie.FIBS_TypeJoin, regex: RegExp("^Type 'join (?<opponent>[a-zA-Z_<>]+)' to accept\\.")),
     CookieDough(cookie: FibsCookie.FIBS_YouAreWatching, regex: RegExp("^You're now watching (?<name>[a-zA-Z_<>]+)")),
     CookieDough(
         cookie: FibsCookie.FIBS_YouStopWatching,
-        regex: RegExp("^You stop watching (?<name>[a-zA-Z_<>]+)")), // overloaded
+        regex: RegExp('^You stop watching (?<name>[a-zA-Z_<>]+)')), // overloaded
     CookieDough(
         cookie: FibsCookie.FIBS_NotDoingAnything,
-        regex: RegExp("^(?<name>[a-zA-Z_<>]+) is not doing anything interesting\\.")),
+        regex: RegExp('^(?<name>[a-zA-Z_<>]+) is not doing anything interesting\\.')),
     CookieDough(
         cookie: FibsCookie.FIBS_PlayerStartsWatching,
-        regex: RegExp("(?<player1>[a-zA-Z_<>]+) starts watching (?<player2>[a-zA-Z_<>]+)")),
-    CookieDough(cookie: FibsCookie.FIBS_PlayerStartsWatching, regex: RegExp("(?<name>[a-zA-Z_<>]+) is watching you")),
+        regex: RegExp('(?<player1>[a-zA-Z_<>]+) starts watching (?<player2>[a-zA-Z_<>]+)')),
+    CookieDough(cookie: FibsCookie.FIBS_PlayerStartsWatching, regex: RegExp('(?<name>[a-zA-Z_<>]+) is watching you')),
     CookieDough(
         cookie: FibsCookie.FIBS_PlayerStopsWatching,
-        regex: RegExp("(?<name>[a-zA-Z_<>]+) stops watching (?<player>[a-zA-Z_<>]+)")),
-    CookieDough(cookie: FibsCookie.FIBS_PlayerIsWatching, regex: RegExp("(?<name>[a-zA-Z_<>]+) is watching ")),
+        regex: RegExp('(?<name>[a-zA-Z_<>]+) stops watching (?<player>[a-zA-Z_<>]+)')),
+    CookieDough(cookie: FibsCookie.FIBS_PlayerIsWatching, regex: RegExp('(?<name>[a-zA-Z_<>]+) is watching ')),
     CookieDough(
         cookie: FibsCookie.FIBS_PlayerLeftGame,
-        regex: RegExp("(?<player1>[a-zA-Z_<>]+) has left the game with (?<player2>[a-zA-Z_<>]+)")),
+        regex: RegExp('(?<player1>[a-zA-Z_<>]+) has left the game with (?<player2>[a-zA-Z_<>]+)')),
     CookieDough(
         cookie: FibsCookie.FIBS_ResignWins,
         regex: RegExp(
-            "^(?<player1>[a-zA-Z_<>]+) gives up\\. (?<player2>[a-zA-Z_<>]+) wins (?<points>[0-9]+) points?")), // PLAYER1 gives up. PLAYER2 wins 1 point.
+            '^(?<player1>[a-zA-Z_<>]+) gives up\\. (?<player2>[a-zA-Z_<>]+) wins (?<points>[0-9]+) points?')), // PLAYER1 gives up. PLAYER2 wins 1 point.
     CookieDough(
         cookie: FibsCookie.FIBS_ResignYouWin,
-        regex: RegExp("^(?<opponent>[a-zA-Z_<>]+) gives up\\. You win (?<points>[0-9]+) points")),
-    CookieDough(cookie: FibsCookie.FIBS_YouAcceptAndWin, regex: RegExp("^You accept and win (?<something>.*)")),
+        regex: RegExp('^(?<opponent>[a-zA-Z_<>]+) gives up\\. You win (?<points>[0-9]+) points')),
+    CookieDough(cookie: FibsCookie.FIBS_YouAcceptAndWin, regex: RegExp('^You accept and win (?<something>.*)')),
     CookieDough(
         cookie: FibsCookie.FIBS_AcceptWins,
         regex: RegExp(
-            "^(?<opponent>[a-zA-Z_<>]+) accepts and wins (?<points>[0-9]+) point")), // PLAYER accepts and wins N points.
+            '^(?<opponent>[a-zA-Z_<>]+) accepts and wins (?<points>[0-9]+) point')), // PLAYER accepts and wins N points.
     CookieDough(
         cookie: FibsCookie.FIBS_PlayersStartingMatch,
         regex: RegExp(
-            "^(?<player1>[a-zA-Z_<>]+) and (?<player2>[a-zA-Z_<>]+) start a (?<points>[0-9]+) point match")), // PLAYER and PLAYER start a <n> point match.
+            '^(?<player1>[a-zA-Z_<>]+) and (?<player2>[a-zA-Z_<>]+) start a (?<points>[0-9]+) point match')), // PLAYER and PLAYER start a <n> point match.
     CookieDough(
-        cookie: FibsCookie.FIBS_StartingNewGame, regex: RegExp("^Starting a  game with (?<opponent>[a-zA-Z_<>]+)")),
-    CookieDough(cookie: FibsCookie.FIBS_YouGiveUp, regex: RegExp("^You give up")),
+        cookie: FibsCookie.FIBS_StartingNewGame, regex: RegExp('^Starting a  game with (?<opponent>[a-zA-Z_<>]+)')),
+    CookieDough(cookie: FibsCookie.FIBS_YouGiveUp, regex: RegExp('^You give up')),
     CookieDough(
         cookie: FibsCookie.FIBS_YouWinMatch,
-        regex: RegExp("^You win the (?<points>[0-9]+) point match (?<winnerScore>[0-9]+)-(?<loserScore>[0-9]+)")),
+        regex: RegExp('^You win the (?<points>[0-9]+) point match (?<winnerScore>[0-9]+)-(?<loserScore>[0-9]+)')),
     CookieDough(
         cookie: FibsCookie.FIBS_PlayerWinsMatch,
         regex: RegExp(
-            "^(?<opponent>[a-zA-Z_<>]+) wins the (?<points>[0-9]+) point match (?<winnerScore>[0-9]+)-(?<loserScore>[0-9]+)")), //PLAYER wins the 3 point match 3-0 .
+            '^(?<opponent>[a-zA-Z_<>]+) wins the (?<points>[0-9]+) point match (?<winnerScore>[0-9]+)-(?<loserScore>[0-9]+)')), //PLAYER wins the 3 point match 3-0 .
     CookieDough(
         cookie: FibsCookie.FIBS_ResumingUnlimitedMatch,
-        regex: RegExp("^(?<player1>[a-zA-Z_<>]+) and (?<player2>[a-zA-Z_<>]+) are resuming their unlimited match\\.")),
+        regex: RegExp('^(?<player1>[a-zA-Z_<>]+) and (?<player2>[a-zA-Z_<>]+) are resuming their unlimited match\\.')),
     CookieDough(
         cookie: FibsCookie.FIBS_ResumingLimitedMatch,
         regex: RegExp(
-            "^(?<player1>[a-zA-Z_<>]+) and (?<player2>[a-zA-Z_<>]+) are resuming their (?<points>[0-9]+)-point match\\.")),
+            '^(?<player1>[a-zA-Z_<>]+) and (?<player2>[a-zA-Z_<>]+) are resuming their (?<points>[0-9]+)-point match\\.')),
     CookieDough(
         cookie: FibsCookie.FIBS_MatchResult,
         regex: RegExp(
-            "^(?<winner>[a-zA-Z_<>]+) wins a (?<points>[0-9]+) point match against (?<loser>[a-zA-Z_<>]+) +(?<winnerScore>[0-9]+)-(?<loserScore>[0-9]+)")), //PLAYER wins a 9 point match against PLAYER  11-6 .
+            '^(?<winner>[a-zA-Z_<>]+) wins a (?<points>[0-9]+) point match against (?<loser>[a-zA-Z_<>]+) +(?<winnerScore>[0-9]+)-(?<loserScore>[0-9]+)')), //PLAYER wins a 9 point match against PLAYER  11-6 .
     CookieDough(
         cookie: FibsCookie.FIBS_PlayerWantsToResign,
         regex: RegExp(
-            "^(?<name>[a-zA-Z_<>]+) wants to resign\\.")), //  Same as a longline in an actual game  This is just for watching.
+            '^(?<name>[a-zA-Z_<>]+) wants to resign\\.')), //  Same as a longline in an actual game  This is just for watching.
     CookieDough(
         cookie: FibsCookie.FIBS_BAD_AcceptDouble,
-        regex: RegExp("^(?<name>[a-zA-Z_<>]+) accepts? the double\\. The cube shows (?<cube>[0-9]+)")),
+        regex: RegExp('^(?<name>[a-zA-Z_<>]+) accepts? the double\\. The cube shows (?<cube>[0-9]+)')),
     CookieDough(
         cookie: FibsCookie.FIBS_YouAcceptDouble,
-        regex: RegExp("^You accept the double\\. The cube shows (?<cube>[0-9]+)")),
+        regex: RegExp('^You accept the double\\. The cube shows (?<cube>[0-9]+)')),
     CookieDough(
         cookie: FibsCookie.FIBS_PlayerAcceptsDouble,
-        regex: RegExp("(?<name>^[a-zA-Z_<>]+) accepts the double\\. The cube shows (?<cube>[0-9]+)")),
+        regex: RegExp('(?<name>^[a-zA-Z_<>]+) accepts the double\\. The cube shows (?<cube>[0-9]+)')),
     CookieDough(
         cookie: FibsCookie.FIBS_PlayerAcceptsDouble,
-        regex: RegExp("^(?<name>[a-zA-Z_<>]+) accepts the double")), // while watching
+        regex: RegExp('^(?<name>[a-zA-Z_<>]+) accepts the double')), // while watching
     CookieDough(
         cookie: FibsCookie.FIBS_ResumeMatchRequest,
-        regex: RegExp("^(?<name>[a-zA-Z_<>]+) wants to resume a saved match with you")),
+        regex: RegExp('^(?<name>[a-zA-Z_<>]+) wants to resume a saved match with you')),
     CookieDough(
         cookie: FibsCookie.FIBS_ResumeMatchAck0,
-        regex: RegExp("^(?<opponent>[a-zA-Z_<>]+) has joined you\\. Your running match was loaded")),
-    CookieDough(cookie: FibsCookie.FIBS_YouWinGame, regex: RegExp("^You win the game and get (?<points>[0-9]+)")),
+        regex: RegExp('^(?<opponent>[a-zA-Z_<>]+) has joined you\\. Your running match was loaded')),
+    CookieDough(cookie: FibsCookie.FIBS_YouWinGame, regex: RegExp('^You win the game and get (?<points>[0-9]+)')),
     CookieDough(
         cookie: FibsCookie.FIBS_UnlimitedInvite,
-        regex: RegExp("^(?<name>[a-zA-Z_<>]+) wants to play an unlimted match with you")),
+        regex: RegExp('^(?<name>[a-zA-Z_<>]+) wants to play an unlimted match with you')),
     CookieDough(
         cookie: FibsCookie.FIBS_PlayerWinsGame,
-        regex: RegExp("^(?<opponent>[a-zA-Z_<>]+) wins the game and gets (?<points>[0-9]+) points?. Sorry")),
+        regex: RegExp('^(?<opponent>[a-zA-Z_<>]+) wins the game and gets (?<points>[0-9]+) points?. Sorry')),
     // CookieDough (cookie: FibsCookie.FIBS_PlayerWinsGame, regex: RegExp("^[a-zA-Z_<>]+ wins the game and gets [0-9] points?.")), // (when watching)
     CookieDough(
         cookie: FibsCookie.FIBS_WatchGameWins,
-        regex: RegExp("^(?<name>[a-zA-Z_<>]+) wins the game and gets (?<points>[0-9]+) points")),
+        regex: RegExp('^(?<name>[a-zA-Z_<>]+) wins the game and gets (?<points>[0-9]+) points')),
     CookieDough(
         cookie: FibsCookie.FIBS_PlayersStartingUnlimitedMatch,
         regex: RegExp(
-            "^(?<player1>[a-zA-Z_<>]+) and (?<player2>[a-zA-Z_<>]+) start an unlimited match")), // PLAYER_A and PLAYER_B start an unlimited match.
+            '^(?<player1>[a-zA-Z_<>]+) and (?<player2>[a-zA-Z_<>]+) start an unlimited match')), // PLAYER_A and PLAYER_B start an unlimited match.
     CookieDough(
         cookie: FibsCookie.FIBS_ReportLimitedMatch,
         regex: RegExp(
-            "^(?<player1>[a-zA-Z_<>]+) +- +(?<player2>[a-zA-Z_<>]+) (?<points>[0-9]+) point match (?<score1>[0-9]+)-(?<score2>[0-9]+)")), // PLAYER_A        -       PLAYER_B (5 point match 2-2)
+            '^(?<player1>[a-zA-Z_<>]+) +- +(?<player2>[a-zA-Z_<>]+) (?<points>[0-9]+) point match (?<score1>[0-9]+)-(?<score2>[0-9]+)')), // PLAYER_A        -       PLAYER_B (5 point match 2-2)
     CookieDough(
         cookie: FibsCookie.FIBS_ReportUnlimitedMatch,
-        regex: RegExp("^(?<player1>[a-zA-Z_<>]+) +- +(?<player2>[a-zA-Z_<>]+) \\(unlimited (?<something>.*)")),
+        regex: RegExp('^(?<player1>[a-zA-Z_<>]+) +- +(?<player2>[a-zA-Z_<>]+) \\(unlimited (?<something>.*)')),
     CookieDough(
         cookie: FibsCookie.FIBS_ShowMovesStart,
-        regex: RegExp("^(?<playerX>[a-zA-Z_<>]+) is X - (?<playerO>[a-zA-Z_<>]+) is O")),
-    CookieDough(cookie: FibsCookie.FIBS_ShowMovesRoll, regex: RegExp("^[XO]: \\([1-6]")), // ORDER MATTERS HERE
-    CookieDough(cookie: FibsCookie.FIBS_ShowMovesWins, regex: RegExp("^[XO]: wins")),
-    CookieDough(cookie: FibsCookie.FIBS_ShowMovesDoubles, regex: RegExp("^[XO]: doubles")),
-    CookieDough(cookie: FibsCookie.FIBS_ShowMovesAccepts, regex: RegExp("^[XO]: accepts")),
-    CookieDough(cookie: FibsCookie.FIBS_ShowMovesRejects, regex: RegExp("^[XO]: rejects")),
-    CookieDough(cookie: FibsCookie.FIBS_ShowMovesOther, regex: RegExp("^[XO]:")), // AND HERE
-    CookieDough(cookie: FibsCookie.FIBS_ScoreUpdate, regex: RegExp("^score in (?<points>[0-9]+) point match:")),
+        regex: RegExp('^(?<playerX>[a-zA-Z_<>]+) is X - (?<playerO>[a-zA-Z_<>]+) is O')),
+    CookieDough(cookie: FibsCookie.FIBS_ShowMovesRoll, regex: RegExp('^[XO]: \\([1-6]')), // ORDER MATTERS HERE
+    CookieDough(cookie: FibsCookie.FIBS_ShowMovesWins, regex: RegExp('^[XO]: wins')),
+    CookieDough(cookie: FibsCookie.FIBS_ShowMovesDoubles, regex: RegExp('^[XO]: doubles')),
+    CookieDough(cookie: FibsCookie.FIBS_ShowMovesAccepts, regex: RegExp('^[XO]: accepts')),
+    CookieDough(cookie: FibsCookie.FIBS_ShowMovesRejects, regex: RegExp('^[XO]: rejects')),
+    CookieDough(cookie: FibsCookie.FIBS_ShowMovesOther, regex: RegExp('^[XO]:')), // AND HERE
+    CookieDough(cookie: FibsCookie.FIBS_ScoreUpdate, regex: RegExp('^score in (?<points>[0-9]+) point match:')),
     CookieDough(
         cookie: FibsCookie.FIBS_MatchStart,
-        regex: RegExp("^Score is (?<score1>[0-9]+)-(?<score2>[0-9]+) in a (?<points>[0-9]+) point match\\.")),
-    CookieDough(cookie: FibsCookie.FIBS_SettingsHeader, regex: RegExp("^Settings of variables:")),
+        regex: RegExp('^Score is (?<score1>[0-9]+)-(?<score2>[0-9]+) in a (?<points>[0-9]+) point match\\.')),
+    CookieDough(cookie: FibsCookie.FIBS_SettingsHeader, regex: RegExp('^Settings of variables:')),
     CookieDough(
         cookie: FibsCookie.FIBS_SettingsValue,
         regex: RegExp(
-            "^(?<name>allowpip|autoboard|autodouble|automove|bell|crawford|double|moreboards|moves|greedy|notify|ratings|ready|report|silent|telnet|wrap) +(?<value>YES|NO)")),
-    CookieDough(cookie: FibsCookie.FIBS_Turn, regex: RegExp("^turn:")),
-    CookieDough(cookie: FibsCookie.FIBS_SettingsValue, regex: RegExp("^(?<name>boardstyle): +(?<value>[1-3])")),
+            '^(?<name>allowpip|autoboard|autodouble|automove|bell|crawford|double|moreboards|moves|greedy|notify|ratings|ready|report|silent|telnet|wrap) +(?<value>YES|NO)')),
+    CookieDough(cookie: FibsCookie.FIBS_Turn, regex: RegExp('^turn:')),
+    CookieDough(cookie: FibsCookie.FIBS_SettingsValue, regex: RegExp('^(?<name>boardstyle): +(?<value>[1-3])')),
     CookieDough(
         cookie: FibsCookie.FIBS_SettingsChange,
         regex: RegExp("^Value of '(?<name>boardstyle)' set to (?<value>[1-3])\\.")),
-    CookieDough(cookie: FibsCookie.FIBS_SettingsValue, regex: RegExp("^(?<name>linelength): +(?<value>[0-9]+)")),
+    CookieDough(cookie: FibsCookie.FIBS_SettingsValue, regex: RegExp('^(?<name>linelength): +(?<value>[0-9]+)')),
     CookieDough(
         cookie: FibsCookie.FIBS_SettingsChange,
         regex: RegExp("^Value of '(?<name>linelength)' set to (?<value>[0-9]+)\\.")),
-    CookieDough(cookie: FibsCookie.FIBS_SettingsValue, regex: RegExp("^(?<name>pagelength): +(?<value>[0-9]+)")),
+    CookieDough(cookie: FibsCookie.FIBS_SettingsValue, regex: RegExp('^(?<name>pagelength): +(?<value>[0-9]+)')),
     CookieDough(
         cookie: FibsCookie.FIBS_SettingsChange,
         regex: RegExp("^Value of '(?<name>pagelength)' set to (?<value>[0-9]+)\\.")),
     CookieDough(
-        cookie: FibsCookie.FIBS_SettingsValue, regex: RegExp("^(?<name>redoubles): +(?<value>none|unlimited|[0-9]+)")),
+        cookie: FibsCookie.FIBS_SettingsValue, regex: RegExp('^(?<name>redoubles): +(?<value>none|unlimited|[0-9]+)')),
     CookieDough(
         cookie: FibsCookie.FIBS_SettingsChange,
         regex: RegExp("^Value of '(?<name>redoubles)' set to '?(?<value>none|unlimited|[0-9]+)'?\\.")),
     CookieDough(
         cookie: FibsCookie.FIBS_SettingsValue,
-        regex: RegExp("^(?<name>sortwho): +(?<value>login|name|rating|rrating)")),
+        regex: RegExp('^(?<name>sortwho): +(?<value>login|name|rating|rrating)')),
     CookieDough(
         cookie: FibsCookie.FIBS_SettingsChange,
         regex: RegExp("^Value of '(?<name>sortwho)' set to (?<value>login|name|rating|rrating)")),
-    CookieDough(cookie: FibsCookie.FIBS_SettingsValue, regex: RegExp("^(?<name>timezone): +(?<value>.*)")),
+    CookieDough(cookie: FibsCookie.FIBS_SettingsValue, regex: RegExp('^(?<name>timezone): +(?<value>.*)')),
     CookieDough(
         cookie: FibsCookie.FIBS_SettingsChange, regex: RegExp("^Value of '(?<name>timezone)' set to (?<value>.*)\\.")),
     CookieDough(
         cookie: FibsCookie.FIBS_CantMove,
         regex: RegExp("^(?<name>[a-zA-Z_<>]+) can't move")), // PLAYER can't move || You can't move
-    CookieDough(cookie: FibsCookie.FIBS_ListOfGames, regex: RegExp("^List of games:")),
-    CookieDough(cookie: FibsCookie.FIBS_PlayerInfoStart, regex: RegExp("^Information about")),
-    CookieDough(cookie: FibsCookie.FIBS_EmailAddress, regex: RegExp("^  Email address:")),
-    CookieDough(cookie: FibsCookie.FIBS_NoEmail, regex: RegExp("^  No email address")),
-    CookieDough(cookie: FibsCookie.FIBS_WavesAgain, regex: RegExp("^(?<name>[a-zA-Z_<>]+) waves goodbye again")),
-    CookieDough(cookie: FibsCookie.FIBS_Waves, regex: RegExp("^(?<name>[a-zA-Z_<>]+) waves goodbye")),
-    CookieDough(cookie: FibsCookie.FIBS_Waves, regex: RegExp("^You wave goodbye")),
-    CookieDough(cookie: FibsCookie.FIBS_WavesAgain, regex: RegExp("^You wave goodbye again and log out")),
-    CookieDough(cookie: FibsCookie.FIBS_NoSavedGames, regex: RegExp("^no saved games")),
+    CookieDough(cookie: FibsCookie.FIBS_ListOfGames, regex: RegExp('^List of games:')),
+    CookieDough(cookie: FibsCookie.FIBS_PlayerInfoStart, regex: RegExp('^Information about')),
+    CookieDough(cookie: FibsCookie.FIBS_EmailAddress, regex: RegExp('^  Email address:')),
+    CookieDough(cookie: FibsCookie.FIBS_NoEmail, regex: RegExp('^  No email address')),
+    CookieDough(cookie: FibsCookie.FIBS_WavesAgain, regex: RegExp('^(?<name>[a-zA-Z_<>]+) waves goodbye again')),
+    CookieDough(cookie: FibsCookie.FIBS_Waves, regex: RegExp('^(?<name>[a-zA-Z_<>]+) waves goodbye')),
+    CookieDough(cookie: FibsCookie.FIBS_Waves, regex: RegExp('^You wave goodbye')),
+    CookieDough(cookie: FibsCookie.FIBS_WavesAgain, regex: RegExp('^You wave goodbye again and log out')),
+    CookieDough(cookie: FibsCookie.FIBS_NoSavedGames, regex: RegExp('^no saved games')),
     CookieDough(
         cookie: FibsCookie.FIBS_SavedMatch,
-        regex: RegExp("^  (?<player1>[a-zA-Z_<>]+) +(?<score1>[0-9]+) +(?<score2>[0-9]+) +- +(?<something>.*)")),
-    CookieDough(cookie: FibsCookie.FIBS_SavedMatchPlaying, regex: RegExp("^ \\*[a-zA-Z_<>]+ +[0-9]+ +[0-9]+ +- +")),
+        regex: RegExp('^  (?<player1>[a-zA-Z_<>]+) +(?<score1>[0-9]+) +(?<score2>[0-9]+) +- +(?<something>.*)')),
+    CookieDough(cookie: FibsCookie.FIBS_SavedMatchPlaying, regex: RegExp('^ \\*[a-zA-Z_<>]+ +[0-9]+ +[0-9]+ +- +')),
     // NOTE: for FIBS_SavedMatchReady, see the Stars message, because it will appear to be one of those (has asterisk at index 0).
     CookieDough(
-        cookie: FibsCookie.FIBS_PlayerIsWaitingForYou, regex: RegExp("^[a-zA-Z_<>]+ is waiting for you to log in\\.")),
-    CookieDough(cookie: FibsCookie.FIBS_IsAway, regex: RegExp("^[a-zA-Z_<>]+ is away: ")),
-    CookieDough(cookie: FibsCookie.FIBS_Junk, regex: RegExp("^Closed old connection with user")),
-    CookieDough(cookie: FibsCookie.FIBS_Done, regex: RegExp("^Done\\.")),
+        cookie: FibsCookie.FIBS_PlayerIsWaitingForYou, regex: RegExp('^[a-zA-Z_<>]+ is waiting for you to log in\\.')),
+    CookieDough(cookie: FibsCookie.FIBS_IsAway, regex: RegExp('^[a-zA-Z_<>]+ is away: ')),
+    CookieDough(cookie: FibsCookie.FIBS_Junk, regex: RegExp('^Closed old connection with user')),
+    CookieDough(cookie: FibsCookie.FIBS_Done, regex: RegExp('^Done\\.')),
     CookieDough(cookie: FibsCookie.FIBS_YourTurnToMove, regex: RegExp("^It's your turn to move\\.")),
     CookieDough(
         cookie: FibsCookie.FIBS_SavedMatchesHeader,
-        regex: RegExp("^  opponent          matchlength   score \\(your points first\\)")),
-    CookieDough(cookie: FibsCookie.FIBS_MessagesForYou, regex: RegExp("^There are messages for you:")),
+        regex: RegExp('^  opponent          matchlength   score \\(your points first\\)')),
+    CookieDough(cookie: FibsCookie.FIBS_MessagesForYou, regex: RegExp('^There are messages for you:')),
     CookieDough(
-        cookie: FibsCookie.FIBS_DoublingCubeNow, regex: RegExp("^The number on the doubling cube is now [0-9]+")),
+        cookie: FibsCookie.FIBS_DoublingCubeNow, regex: RegExp('^The number on the doubling cube is now [0-9]+')),
     CookieDough(
         cookie: FibsCookie.FIBS_FailedLogin,
-        regex: RegExp("^> [0-9]+")), // bogus CLIP messages sent after a failed login
-    CookieDough(cookie: FibsCookie.FIBS_Average, regex: RegExp("^Time (UTC)  average min max")),
-    CookieDough(cookie: FibsCookie.FIBS_DiceTest, regex: RegExp("^[nST]: ")),
-    CookieDough(cookie: FibsCookie.FIBS_LastLogout, regex: RegExp("^  Last logout:")),
-    CookieDough(cookie: FibsCookie.FIBS_RatingCalcStart, regex: RegExp("^rating calculation:")),
-    CookieDough(cookie: FibsCookie.FIBS_RatingCalcInfo, regex: RegExp("^Probability that underdog wins:")),
+        regex: RegExp('^> [0-9]+')), // bogus CLIP messages sent after a failed login
+    CookieDough(cookie: FibsCookie.FIBS_Average, regex: RegExp('^Time (UTC)  average min max')),
+    CookieDough(cookie: FibsCookie.FIBS_DiceTest, regex: RegExp('^[nST]: ')),
+    CookieDough(cookie: FibsCookie.FIBS_LastLogout, regex: RegExp('^  Last logout:')),
+    CookieDough(cookie: FibsCookie.FIBS_RatingCalcStart, regex: RegExp('^rating calculation:')),
+    CookieDough(cookie: FibsCookie.FIBS_RatingCalcInfo, regex: RegExp('^Probability that underdog wins:')),
     CookieDough(
         cookie: FibsCookie.FIBS_RatingCalcInfo,
-        regex: RegExp("is 1-Pu if underdog wins")), // P=0.505861 is 1-Pu if underdog wins and Pu if favorite wins
+        regex: RegExp('is 1-Pu if underdog wins')), // P=0.505861 is 1-Pu if underdog wins and Pu if favorite wins
     CookieDough(
-        cookie: FibsCookie.FIBS_RatingCalcInfo, regex: RegExp("^Experience: ")), // Experience: fergy 500 - jfk 5832
-    CookieDough(
-        cookie: FibsCookie.FIBS_RatingCalcInfo,
-        regex: RegExp("^K=max\\(1")), // K=max(1 ,		-Experience/100+5) for fergy: 1.000000
-    CookieDough(cookie: FibsCookie.FIBS_RatingCalcInfo, regex: RegExp("^rating difference")),
+        cookie: FibsCookie.FIBS_RatingCalcInfo, regex: RegExp('^Experience: ')), // Experience: fergy 500 - jfk 5832
     CookieDough(
         cookie: FibsCookie.FIBS_RatingCalcInfo,
-        regex: RegExp("^change for")), // change for fergy: 4*K*sqrt(N)*P=2.023443
-    CookieDough(cookie: FibsCookie.FIBS_RatingCalcInfo, regex: RegExp("^match length  ")),
-    CookieDough(cookie: FibsCookie.FIBS_WatchingHeader, regex: RegExp("^Watching players:")),
-    CookieDough(cookie: FibsCookie.FIBS_SettingsHeader, regex: RegExp("^The current settings are:")),
-    CookieDough(cookie: FibsCookie.FIBS_AwayListHeader, regex: RegExp("^The following users are away:")),
+        regex: RegExp('^K=max\\(1')), // K=max(1 ,		-Experience/100+5) for fergy: 1.000000
+    CookieDough(cookie: FibsCookie.FIBS_RatingCalcInfo, regex: RegExp('^rating difference')),
+    CookieDough(
+        cookie: FibsCookie.FIBS_RatingCalcInfo,
+        regex: RegExp('^change for')), // change for fergy: 4*K*sqrt(N)*P=2.023443
+    CookieDough(cookie: FibsCookie.FIBS_RatingCalcInfo, regex: RegExp('^match length  ')),
+    CookieDough(cookie: FibsCookie.FIBS_WatchingHeader, regex: RegExp('^Watching players:')),
+    CookieDough(cookie: FibsCookie.FIBS_SettingsHeader, regex: RegExp('^The current settings are:')),
+    CookieDough(cookie: FibsCookie.FIBS_AwayListHeader, regex: RegExp('^The following users are away:')),
     CookieDough(
         cookie: FibsCookie.FIBS_RatingExperience,
-        regex: RegExp("^  Rating: +[0-9]+\\.")), // Rating: 1693.11 Experience: 5781
-    CookieDough(cookie: FibsCookie.FIBS_NotLoggedIn, regex: RegExp("^  Not logged in right now\\.")),
-    CookieDough(cookie: FibsCookie.FIBS_IsPlayingWith, regex: RegExp("is playing with")),
+        regex: RegExp('^  Rating: +[0-9]+\\.')), // Rating: 1693.11 Experience: 5781
+    CookieDough(cookie: FibsCookie.FIBS_NotLoggedIn, regex: RegExp('^  Not logged in right now\\.')),
+    CookieDough(cookie: FibsCookie.FIBS_IsPlayingWith, regex: RegExp('is playing with')),
     CookieDough(
         cookie: FibsCookie.FIBS_SavedScoreHeader,
-        regex: RegExp("^opponent +matchlength")), //	opponent          matchlength   score (your points first)
+        regex: RegExp('^opponent +matchlength')), //	opponent          matchlength   score (your points first)
     CookieDough(
         cookie: FibsCookie.FIBS_StillLoggedIn,
-        regex: RegExp("^  Still logged in\\.")), //  Still logged in. 2:12 minutes idle.
-    CookieDough(cookie: FibsCookie.FIBS_NoOneIsAway, regex: RegExp("^None of the users is away\\.")),
+        regex: RegExp('^  Still logged in\\.')), //  Still logged in. 2:12 minutes idle.
+    CookieDough(cookie: FibsCookie.FIBS_NoOneIsAway, regex: RegExp('^None of the users is away\\.')),
     CookieDough(
         cookie: FibsCookie.FIBS_PlayerListHeader,
-        regex: RegExp("^No  S  username        rating  exp login    idle  from")),
-    CookieDough(cookie: FibsCookie.FIBS_RatingsHeader, regex: RegExp("^ rank name            rating    Experience")),
-    CookieDough(cookie: FibsCookie.FIBS_ClearScreen, regex: RegExp("^.\\[, },H.\\[2J")), // ANSI clear screen sequence
-    CookieDough(cookie: FibsCookie.FIBS_Timeout, regex: RegExp("^Connection timed out\\.")),
-    CookieDough(cookie: FibsCookie.FIBS_Goodbye, regex: RegExp("(?<message>           Goodbye\\.)")),
-    CookieDough(cookie: FibsCookie.FIBS_LastLogin, regex: RegExp("^  Last login:")),
-    CookieDough(cookie: FibsCookie.FIBS_NoInfo, regex: RegExp("^No information found on user")),
+        regex: RegExp('^No  S  username        rating  exp login    idle  from')),
+    CookieDough(cookie: FibsCookie.FIBS_RatingsHeader, regex: RegExp('^ rank name            rating    Experience')),
+    CookieDough(cookie: FibsCookie.FIBS_ClearScreen, regex: RegExp('^.\\[, },H.\\[2J')), // ANSI clear screen sequence
+    CookieDough(cookie: FibsCookie.FIBS_Timeout, regex: RegExp('^Connection timed out\\.')),
+    CookieDough(cookie: FibsCookie.FIBS_Goodbye, regex: RegExp('(?<message>           Goodbye\\.)')),
+    CookieDough(cookie: FibsCookie.FIBS_LastLogin, regex: RegExp('^  Last login:')),
+    CookieDough(cookie: FibsCookie.FIBS_NoInfo, regex: RegExp('^No information found on user')),
     CookieDough(
         cookie: FibsCookie.FIBS_SettingsChange,
         regex: RegExp("^You're away\\. Please type 'back'"),
-        extras: {"name": "away", "value": "YES"}),
+        extras: {'name': 'away', 'value': 'YES'}),
     CookieDough(
         cookie: FibsCookie.FIBS_SettingsChange,
-        regex: RegExp("^Welcome back\\."),
-        extras: {"name": "away", "value": "NO"}),
+        regex: RegExp('^Welcome back\\.'),
+        extras: {'name': 'away', 'value': 'NO'}),
   ];
 
   //--- Numeric messages ---------------------------------------------------
@@ -515,204 +515,204 @@ class CookieMonster {
     CookieDough(
         cookie: FibsCookie.CLIP_WHO_INFO,
         regex: RegExp(
-            r"^5 (?<name>[^ ]+) (?<opponent>[^ ]+) (?<watching>[^ ]+) (?<ready>[01]) (?<away>[01]) (?<rating>[0-9]+\\.[0-9]+) (?<experience>[0-9]+) (?<idle>[0-9]+) (?<login>[0-9]+) (?<hostName>[^ ]+) (?<client>[^ ]+) (?<email>[^ ]+)")),
+            r'^5 (?<name>[^ ]+) (?<opponent>[^ ]+) (?<watching>[^ ]+) (?<ready>[01]) (?<away>[01]) (?<rating>[0-9]+\\.[0-9]+) (?<experience>[0-9]+) (?<idle>[0-9]+) (?<login>[0-9]+) (?<hostName>[^ ]+) (?<client>[^ ]+) (?<email>[^ ]+)')),
     CookieDough(
-        cookie: FibsCookie.FIBS_Average, regex: RegExp(r"^[0-9][0-9]:[0-9][0-9]-")), // output of average command
-    CookieDough(cookie: FibsCookie.FIBS_DiceTest, regex: RegExp(r"^[1-6]-1 [0-9]")), // output of dicetest command
-    CookieDough(cookie: FibsCookie.FIBS_DiceTest, regex: RegExp(r"^[1-6]: [0-9]")),
-    CookieDough(cookie: FibsCookie.FIBS_Stat, regex: RegExp(r"^[0-9]+ bytes")), // output from stat command
-    CookieDough(cookie: FibsCookie.FIBS_Stat, regex: RegExp(r"^[0-9]+ accounts")),
-    CookieDough(cookie: FibsCookie.FIBS_Stat, regex: RegExp(r"^[0-9]+ ratings saved. reset log")),
-    CookieDough(cookie: FibsCookie.FIBS_Stat, regex: RegExp(r"^[0-9]+ registered users.")),
-    CookieDough(cookie: FibsCookie.FIBS_Stat, regex: RegExp(r"^[0-9]+\\([0-9]+\\) saved games check by cron")),
-    CookieDough(cookie: FibsCookie.CLIP_WHO_END, regex: RegExp(r"^6$")),
-    CookieDough(cookie: FibsCookie.CLIP_SHOUTS, regex: RegExp(r"^13 (?<name>[a-zA-Z_<>]+) (?<message>.*)")),
-    CookieDough(cookie: FibsCookie.CLIP_SAYS, regex: RegExp(r"^12 (?<name>[a-zA-Z_<>]+) (?<message>.*)")),
-    CookieDough(cookie: FibsCookie.CLIP_WHISPERS, regex: RegExp(r"^14 (?<name>[a-zA-Z_<>]+) (?<message>.*)")),
-    CookieDough(cookie: FibsCookie.CLIP_KIBITZES, regex: RegExp(r"^15 (?<name>[a-zA-Z_<>]+) (?<message>.*)")),
-    CookieDough(cookie: FibsCookie.CLIP_YOU_SAY, regex: RegExp(r"^16 (?<name>[a-zA-Z_<>]+) (?<message>.*)")),
-    CookieDough(cookie: FibsCookie.CLIP_YOU_SHOUT, regex: RegExp(r"^17 (?<message>.*)")),
-    CookieDough(cookie: FibsCookie.CLIP_YOU_WHISPER, regex: RegExp(r"^18 (?<message>.*)")),
-    CookieDough(cookie: FibsCookie.CLIP_YOU_KIBITZ, regex: RegExp(r"^19 (?<message>.*)")),
-    CookieDough(cookie: FibsCookie.CLIP_LOGIN, regex: RegExp(r"^7 (?<name>[a-zA-Z_<>]+) (?<message>.*)")),
-    CookieDough(cookie: FibsCookie.CLIP_LOGOUT, regex: RegExp(r"^8 (?<name>[a-zA-Z_<>]+) (?<message>.*)")),
+        cookie: FibsCookie.FIBS_Average, regex: RegExp(r'^[0-9][0-9]:[0-9][0-9]-')), // output of average command
+    CookieDough(cookie: FibsCookie.FIBS_DiceTest, regex: RegExp(r'^[1-6]-1 [0-9]')), // output of dicetest command
+    CookieDough(cookie: FibsCookie.FIBS_DiceTest, regex: RegExp(r'^[1-6]: [0-9]')),
+    CookieDough(cookie: FibsCookie.FIBS_Stat, regex: RegExp(r'^[0-9]+ bytes')), // output from stat command
+    CookieDough(cookie: FibsCookie.FIBS_Stat, regex: RegExp(r'^[0-9]+ accounts')),
+    CookieDough(cookie: FibsCookie.FIBS_Stat, regex: RegExp(r'^[0-9]+ ratings saved. reset log')),
+    CookieDough(cookie: FibsCookie.FIBS_Stat, regex: RegExp(r'^[0-9]+ registered users.')),
+    CookieDough(cookie: FibsCookie.FIBS_Stat, regex: RegExp(r'^[0-9]+\\([0-9]+\\) saved games check by cron')),
+    CookieDough(cookie: FibsCookie.CLIP_WHO_END, regex: RegExp(r'^6$')),
+    CookieDough(cookie: FibsCookie.CLIP_SHOUTS, regex: RegExp(r'^13 (?<name>[a-zA-Z_<>]+) (?<message>.*)')),
+    CookieDough(cookie: FibsCookie.CLIP_SAYS, regex: RegExp(r'^12 (?<name>[a-zA-Z_<>]+) (?<message>.*)')),
+    CookieDough(cookie: FibsCookie.CLIP_WHISPERS, regex: RegExp(r'^14 (?<name>[a-zA-Z_<>]+) (?<message>.*)')),
+    CookieDough(cookie: FibsCookie.CLIP_KIBITZES, regex: RegExp(r'^15 (?<name>[a-zA-Z_<>]+) (?<message>.*)')),
+    CookieDough(cookie: FibsCookie.CLIP_YOU_SAY, regex: RegExp(r'^16 (?<name>[a-zA-Z_<>]+) (?<message>.*)')),
+    CookieDough(cookie: FibsCookie.CLIP_YOU_SHOUT, regex: RegExp(r'^17 (?<message>.*)')),
+    CookieDough(cookie: FibsCookie.CLIP_YOU_WHISPER, regex: RegExp(r'^18 (?<message>.*)')),
+    CookieDough(cookie: FibsCookie.CLIP_YOU_KIBITZ, regex: RegExp(r'^19 (?<message>.*)')),
+    CookieDough(cookie: FibsCookie.CLIP_LOGIN, regex: RegExp(r'^7 (?<name>[a-zA-Z_<>]+) (?<message>.*)')),
+    CookieDough(cookie: FibsCookie.CLIP_LOGOUT, regex: RegExp(r'^8 (?<name>[a-zA-Z_<>]+) (?<message>.*)')),
     CookieDough(
-        cookie: FibsCookie.CLIP_MESSAGE, regex: RegExp(r"^9 (?<from>[a-zA-Z_<>]+) (?<time>[0-9]+) (?<message>.*)")),
-    CookieDough(cookie: FibsCookie.CLIP_MESSAGE_DELIVERED, regex: RegExp(r"^10 (?<name>[a-zA-Z_<>]+)$")),
-    CookieDough(cookie: FibsCookie.CLIP_MESSAGE_SAVED, regex: RegExp(r"^11 (?<name>[a-zA-Z_<>]+)$")),
+        cookie: FibsCookie.CLIP_MESSAGE, regex: RegExp(r'^9 (?<from>[a-zA-Z_<>]+) (?<time>[0-9]+) (?<message>.*)')),
+    CookieDough(cookie: FibsCookie.CLIP_MESSAGE_DELIVERED, regex: RegExp(r'^10 (?<name>[a-zA-Z_<>]+)$')),
+    CookieDough(cookie: FibsCookie.CLIP_MESSAGE_SAVED, regex: RegExp(r'^11 (?<name>[a-zA-Z_<>]+)$')),
   ];
 
   //--- '**' messages ------------------------------------------------------
   static final starsBatch = [
-    CookieDough(cookie: FibsCookie.FIBS_Username, regex: RegExp(r"^\\*\\* User")),
-    CookieDough(cookie: FibsCookie.FIBS_Junk, regex: RegExp(r"^\\*\\* You tell ")), // "** You tell PLAYER: xxxxx"
-    CookieDough(cookie: FibsCookie.FIBS_YouGag, regex: RegExp(r"^\\*\\* You gag")),
-    CookieDough(cookie: FibsCookie.FIBS_YouUngag, regex: RegExp(r"^\\*\\* You ungag")),
-    CookieDough(cookie: FibsCookie.FIBS_YouBlind, regex: RegExp(r"^\\*\\* You blind")),
-    CookieDough(cookie: FibsCookie.FIBS_YouUnblind, regex: RegExp(r"^\\*\\* You unblind")),
+    CookieDough(cookie: FibsCookie.FIBS_Username, regex: RegExp(r'^\\*\\* User')),
+    CookieDough(cookie: FibsCookie.FIBS_Junk, regex: RegExp(r'^\\*\\* You tell ')), // "** You tell PLAYER: xxxxx"
+    CookieDough(cookie: FibsCookie.FIBS_YouGag, regex: RegExp(r'^\\*\\* You gag')),
+    CookieDough(cookie: FibsCookie.FIBS_YouUngag, regex: RegExp(r'^\\*\\* You ungag')),
+    CookieDough(cookie: FibsCookie.FIBS_YouBlind, regex: RegExp(r'^\\*\\* You blind')),
+    CookieDough(cookie: FibsCookie.FIBS_YouUnblind, regex: RegExp(r'^\\*\\* You unblind')),
     CookieDough(cookie: FibsCookie.FIBS_UseToggleReady, regex: RegExp(r"^\\*\\* Use 'toggle ready' first")),
     CookieDough(
-        cookie: FibsCookie.FIBS_NewMatchAck9, regex: RegExp(r"^\\*\\* You are now playing an unlimited match with ")),
+        cookie: FibsCookie.FIBS_NewMatchAck9, regex: RegExp(r'^\\*\\* You are now playing an unlimited match with ')),
     CookieDough(
         cookie: FibsCookie.FIBS_NewMatchAck10,
         regex: RegExp(
-            r"^\\*\\* You are now playing a [0-9]+ point match with ")), // ** You are now playing a 5 point match with PLAYER
+            r'^\\*\\* You are now playing a [0-9]+ point match with ')), // ** You are now playing a 5 point match with PLAYER
     CookieDough(
         cookie: FibsCookie.FIBS_NewMatchAck2,
         regex: RegExp(
-            r"^\\*\\* Player [a-zA-Z_<>]+ has joined you for a")), // ** Player PLAYER has joined you for a 2 point match.
-    CookieDough(cookie: FibsCookie.FIBS_YouTerminated, regex: RegExp(r"^\\*\\* You terminated the game")),
+            r'^\\*\\* Player [a-zA-Z_<>]+ has joined you for a')), // ** Player PLAYER has joined you for a 2 point match.
+    CookieDough(cookie: FibsCookie.FIBS_YouTerminated, regex: RegExp(r'^\\*\\* You terminated the game')),
     CookieDough(
         cookie: FibsCookie.FIBS_OpponentLeftGame,
-        regex: RegExp(r"^\\*\\* Player [a-zA-Z_<>]+ has left the game. The game was saved\\.")),
-    CookieDough(cookie: FibsCookie.FIBS_PlayerLeftGame, regex: RegExp(r"has left the game\\.")), // overloaded
-    CookieDough(cookie: FibsCookie.FIBS_YouInvited, regex: RegExp(r"^\\*\\* You invited")),
-    CookieDough(cookie: FibsCookie.FIBS_YourLastLogin, regex: RegExp(r"^\\*\\* Last login:")),
-    CookieDough(cookie: FibsCookie.FIBS_NoOne, regex: RegExp(r"^\\*\\* There is no one called (?<name>[a-zA-Z_<>]+)")),
+        regex: RegExp(r'^\\*\\* Player [a-zA-Z_<>]+ has left the game. The game was saved\\.')),
+    CookieDough(cookie: FibsCookie.FIBS_PlayerLeftGame, regex: RegExp(r'has left the game\\.')), // overloaded
+    CookieDough(cookie: FibsCookie.FIBS_YouInvited, regex: RegExp(r'^\\*\\* You invited')),
+    CookieDough(cookie: FibsCookie.FIBS_YourLastLogin, regex: RegExp(r'^\\*\\* Last login:')),
+    CookieDough(cookie: FibsCookie.FIBS_NoOne, regex: RegExp(r'^\\*\\* There is no one called (?<name>[a-zA-Z_<>]+)')),
     CookieDough(
         cookie: FibsCookie.FIBS_SettingsChange,
         regex: RegExp(r"^\\*\\* You allow the use the server's 'pip' command\\."),
-        extras: {"name": "allowpip", "value": "YES"}),
+        extras: {'name': 'allowpip', 'value': 'YES'}),
     CookieDough(
         cookie: FibsCookie.FIBS_SettingsChange,
         regex: RegExp(r"^\\*\\* You don't allow the use of the server's 'pip' command\\."),
-        extras: {"name": "allowpip", "value": "NO"}),
+        extras: {'name': 'allowpip', 'value': 'NO'}),
     CookieDough(
         cookie: FibsCookie.FIBS_SettingsChange,
-        regex: RegExp(r"^\\*\\* The board will be refreshed"),
-        extras: {"name": "autoboard", "value": "YES"}),
+        regex: RegExp(r'^\\*\\* The board will be refreshed'),
+        extras: {'name': 'autoboard', 'value': 'YES'}),
     CookieDough(
         cookie: FibsCookie.FIBS_SettingsChange,
         regex: RegExp(r"^\\*\\* The board won't be refreshed"),
-        extras: {"name": "autoboard", "value": "NO"}),
+        extras: {'name': 'autoboard', 'value': 'NO'}),
     CookieDough(
         cookie: FibsCookie.FIBS_SettingsChange,
-        regex: RegExp(r"^\\*\\* You agree that doublets"),
-        extras: {"name": "autodouble", "value": "YES"}),
+        regex: RegExp(r'^\\*\\* You agree that doublets'),
+        extras: {'name': 'autodouble', 'value': 'YES'}),
     CookieDough(
         cookie: FibsCookie.FIBS_SettingsChange,
         regex: RegExp(r"^\\*\\* You don't agree that doublets"),
-        extras: {"name": "autodouble", "value": "NO"}),
+        extras: {'name': 'autodouble', 'value': 'NO'}),
     CookieDough(
         cookie: FibsCookie.FIBS_SettingsChange,
-        regex: RegExp(r"^\\*\\* Forced moves will"),
-        extras: {"name": "automove", "value": "YES"}),
+        regex: RegExp(r'^\\*\\* Forced moves will'),
+        extras: {'name': 'automove', 'value': 'YES'}),
     CookieDough(
         cookie: FibsCookie.FIBS_SettingsChange,
         regex: RegExp(r"^\\*\\* Forced moves won't"),
-        extras: {"name": "automove", "value": "NO"}),
+        extras: {'name': 'automove', 'value': 'NO'}),
     CookieDough(
         cookie: FibsCookie.FIBS_SettingsChange,
-        regex: RegExp(r"^\\*\\* Your terminal will ring"),
-        extras: {"name": "bell", "value": "YES"}),
+        regex: RegExp(r'^\\*\\* Your terminal will ring'),
+        extras: {'name': 'bell', 'value': 'YES'}),
     CookieDough(
         cookie: FibsCookie.FIBS_SettingsChange,
         regex: RegExp(r"^\\*\\* Your terminal won't ring"),
-        extras: {"name": "bell", "value": "NO"}),
+        extras: {'name': 'bell', 'value': 'NO'}),
     CookieDough(
         cookie: FibsCookie.FIBS_SettingsChange,
-        regex: RegExp(r"^\\*\\* You insist on playing with the Crawford rule\\."),
-        extras: {"name": "crawford", "value": "YES"}),
+        regex: RegExp(r'^\\*\\* You insist on playing with the Crawford rule\\.'),
+        extras: {'name': 'crawford', 'value': 'YES'}),
     CookieDough(
         cookie: FibsCookie.FIBS_SettingsChange,
-        regex: RegExp(r"^\\*\\* You would like to play without using the Crawford rule\\."),
-        extras: {"name": "crawford", "value": "NO"}),
+        regex: RegExp(r'^\\*\\* You would like to play without using the Crawford rule\\.'),
+        extras: {'name': 'crawford', 'value': 'NO'}),
     CookieDough(
         cookie: FibsCookie.FIBS_SettingsChange,
-        regex: RegExp(r"^\\*\\* You will be asked if you want to double\\."),
-        extras: {"name": "double", "value": "YES"}),
+        regex: RegExp(r'^\\*\\* You will be asked if you want to double\\.'),
+        extras: {'name': 'double', 'value': 'YES'}),
     CookieDough(
         cookie: FibsCookie.FIBS_SettingsChange,
         regex: RegExp(r"^\\*\\* You won't be asked if you want to double\\."),
-        extras: {"name": "double", "value": "NO"}),
+        extras: {'name': 'double', 'value': 'NO'}),
     CookieDough(
         cookie: FibsCookie.FIBS_SettingsChange,
-        regex: RegExp(r"^\\*\\* Will use automatic greedy bearoffs\\."),
-        extras: {"name": "greedy", "value": "YES"}),
+        regex: RegExp(r'^\\*\\* Will use automatic greedy bearoffs\\.'),
+        extras: {'name': 'greedy', 'value': 'YES'}),
     CookieDough(
         cookie: FibsCookie.FIBS_SettingsChange,
         regex: RegExp(r"^\\*\\* Won't use automatic greedy bearoffs\\."),
-        extras: {"name": "greedy", "value": "NO"}),
+        extras: {'name': 'greedy', 'value': 'NO'}),
     CookieDough(
         cookie: FibsCookie.FIBS_SettingsChange,
-        regex: RegExp(r"^\\*\\* Will send rawboards after rolling\\."),
-        extras: {"name": "moreboards", "value": "YES"}),
+        regex: RegExp(r'^\\*\\* Will send rawboards after rolling\\.'),
+        extras: {'name': 'moreboards', 'value': 'YES'}),
     CookieDough(
         cookie: FibsCookie.FIBS_SettingsChange,
         regex: RegExp(r"^\\*\\* Won't send rawboards after rolling\\."),
-        extras: {"name": "moreboards", "value": "NO"}),
+        extras: {'name': 'moreboards', 'value': 'NO'}),
     CookieDough(
         cookie: FibsCookie.FIBS_SettingsChange,
-        regex: RegExp(r"^\\*\\* You want a list of moves after this game\\."),
-        extras: {"name": "moves", "value": "YES"}),
+        regex: RegExp(r'^\\*\\* You want a list of moves after this game\\.'),
+        extras: {'name': 'moves', 'value': 'YES'}),
     CookieDough(
         cookie: FibsCookie.FIBS_SettingsChange,
         regex: RegExp(r"^\\*\\* You won't see a list of moves after this game\\."),
-        extras: {"name": "moves", "value": "NO"}),
+        extras: {'name': 'moves', 'value': 'NO'}),
     CookieDough(
         cookie: FibsCookie.FIBS_SettingsChange,
         regex: RegExp(r"^\\*\\* You'll be notified"),
-        extras: {"name": "notify", "value": "YES"}),
+        extras: {'name': 'notify', 'value': 'YES'}),
     CookieDough(
         cookie: FibsCookie.FIBS_SettingsChange,
         regex: RegExp(r"^\\*\\* You won't be notified"),
-        extras: {"name": "notify", "value": "NO"}),
+        extras: {'name': 'notify', 'value': 'NO'}),
     CookieDough(
         cookie: FibsCookie.FIBS_SettingsChange,
         regex: RegExp(r"^\\*\\* You'll see how the rating changes are calculated\\."),
-        extras: {"name": "ratings", "value": "YES"}),
+        extras: {'name': 'ratings', 'value': 'YES'}),
     CookieDough(
         cookie: FibsCookie.FIBS_SettingsChange,
         regex: RegExp(r"^\\*\\* You won't see how the rating changes are calculated\\."),
-        extras: {"name": "ratings", "value": "NO"}),
+        extras: {'name': 'ratings', 'value': 'NO'}),
     CookieDough(
         cookie: FibsCookie.FIBS_SettingsChange,
         regex: RegExp(r"^\\*\\* You're now ready to invite or join someone\\."),
-        extras: {"name": "ready", "value": "YES"}),
+        extras: {'name': 'ready', 'value': 'YES'}),
     CookieDough(
         cookie: FibsCookie.FIBS_SettingsChange,
         regex: RegExp(r"^\\*\\* You're now refusing to play with someone\\."),
-        extras: {"name": "ready", "value": "NO"}),
+        extras: {'name': 'ready', 'value': 'NO'}),
     CookieDough(
         cookie: FibsCookie.FIBS_SettingsChange,
-        regex: RegExp(r"^\\*\\* You will be informed"),
-        extras: {"name": "report", "value": "YES"}),
+        regex: RegExp(r'^\\*\\* You will be informed'),
+        extras: {'name': 'report', 'value': 'YES'}),
     CookieDough(
         cookie: FibsCookie.FIBS_SettingsChange,
         regex: RegExp(r"^\\*\\* You won't be informed"),
-        extras: {"name": "report", "value": "NO"}),
+        extras: {'name': 'report', 'value': 'NO'}),
     CookieDough(
         cookie: FibsCookie.FIBS_SettingsChange,
-        regex: RegExp(r"^\\*\\* You will hear what other players shout\\."),
-        extras: {"name": "silent", "value": "YES"}),
+        regex: RegExp(r'^\\*\\* You will hear what other players shout\\.'),
+        extras: {'name': 'silent', 'value': 'YES'}),
     CookieDough(
         cookie: FibsCookie.FIBS_SettingsChange,
         regex: RegExp(r"^\\*\\* You won't hear what other players shout\\."),
-        extras: {"name": "silent", "value": "NO"}),
+        extras: {'name': 'silent', 'value': 'NO'}),
     CookieDough(
         cookie: FibsCookie.FIBS_SettingsChange,
-        regex: RegExp(r"^\\*\\* You use telnet"),
-        extras: {"name": "telnet", "value": "YES"}),
+        regex: RegExp(r'^\\*\\* You use telnet'),
+        extras: {'name': 'telnet', 'value': 'YES'}),
     CookieDough(
         cookie: FibsCookie.FIBS_SettingsChange,
-        regex: RegExp(r"^\\*\\* You use a client program"),
-        extras: {"name": "telnet", "value": "NO"}),
+        regex: RegExp(r'^\\*\\* You use a client program'),
+        extras: {'name': 'telnet', 'value': 'NO'}),
     CookieDough(
         cookie: FibsCookie.FIBS_SettingsChange,
-        regex: RegExp(r"^\\*\\* The server will wrap"),
-        extras: {"name": "wrap", "value": "YES"}),
+        regex: RegExp(r'^\\*\\* The server will wrap'),
+        extras: {'name': 'wrap', 'value': 'YES'}),
     CookieDough(
         cookie: FibsCookie.FIBS_SettingsChange,
-        regex: RegExp(r"^\\*\\* Your terminal knows how to wrap"),
-        extras: {"name": "wrap", "value": "NO"}),
+        regex: RegExp(r'^\\*\\* Your terminal knows how to wrap'),
+        extras: {'name': 'wrap', 'value': 'NO'}),
     CookieDough(
-        cookie: FibsCookie.FIBS_PlayerRefusingGames, regex: RegExp(r"^\\*\\* [a-zA-Z_<>]+ is refusing games\\.")),
+        cookie: FibsCookie.FIBS_PlayerRefusingGames, regex: RegExp(r'^\\*\\* [a-zA-Z_<>]+ is refusing games\\.')),
     CookieDough(cookie: FibsCookie.FIBS_NotWatching, regex: RegExp(r"^\\*\\* You're not watching\\.")),
     CookieDough(
         cookie: FibsCookie.FIBS_NotWatchingPlaying, regex: RegExp(r"^\\*\\* You're not watching or playing\\.")),
     CookieDough(cookie: FibsCookie.FIBS_NotPlaying, regex: RegExp(r"^\\*\\* You're not playing\\.")),
-    CookieDough(cookie: FibsCookie.FIBS_NoUser, regex: RegExp(r"^\\*\\* There is no one called ")),
-    CookieDough(cookie: FibsCookie.FIBS_AlreadyPlaying, regex: RegExp(r"is already playing with")),
+    CookieDough(cookie: FibsCookie.FIBS_NoUser, regex: RegExp(r'^\\*\\* There is no one called ')),
+    CookieDough(cookie: FibsCookie.FIBS_AlreadyPlaying, regex: RegExp(r'is already playing with')),
     CookieDough(cookie: FibsCookie.FIBS_DidntInvite, regex: RegExp(r"^\\*\\* [a-zA-Z_<>]+ didn't invite you.")),
     CookieDough(cookie: FibsCookie.FIBS_BadMove, regex: RegExp(r"^\\*\\* You can't remove this piece")),
     CookieDough(
@@ -721,34 +721,34 @@ class CookieMonster {
     CookieDough(
         cookie: FibsCookie.FIBS_CantShout,
         regex: RegExp(r"^\\*\\* Please type 'toggle silent' again before you shout\\.")),
-    CookieDough(cookie: FibsCookie.FIBS_MustMove, regex: RegExp(r"^\\*\\* You must give [1-4] moves")),
+    CookieDough(cookie: FibsCookie.FIBS_MustMove, regex: RegExp(r'^\\*\\* You must give [1-4] moves')),
     CookieDough(
         cookie: FibsCookie.FIBS_MustComeIn,
-        regex: RegExp(r"^\\*\\* You have to remove pieces from the bar in your first move\\.")),
-    CookieDough(cookie: FibsCookie.FIBS_UsersHeardYou, regex: RegExp(r"^\\*\\* [0-9]+ users? heard you\\.")),
-    CookieDough(cookie: FibsCookie.FIBS_Junk, regex: RegExp(r"^\\*\\* Please wait for [a-zA-Z_<>]+ to join too\\.")),
+        regex: RegExp(r'^\\*\\* You have to remove pieces from the bar in your first move\\.')),
+    CookieDough(cookie: FibsCookie.FIBS_UsersHeardYou, regex: RegExp(r'^\\*\\* [0-9]+ users? heard you\\.')),
+    CookieDough(cookie: FibsCookie.FIBS_Junk, regex: RegExp(r'^\\*\\* Please wait for [a-zA-Z_<>]+ to join too\\.')),
     CookieDough(
         cookie: FibsCookie.FIBS_SavedMatchReady,
         regex: RegExp(
-            r"^\\*\\*[a-zA-Z_<>]+ +[0-9]+ +[0-9]+ +- +[0-9]+")), // double star before a name indicates you have a saved game with this player
+            r'^\\*\\*[a-zA-Z_<>]+ +[0-9]+ +[0-9]+ +- +[0-9]+')), // double star before a name indicates you have a saved game with this player
     CookieDough(
         cookie: FibsCookie.FIBS_NotYourTurnToRoll, regex: RegExp(r"^\\*\\* It's not your turn to roll the dice\\.")),
     CookieDough(cookie: FibsCookie.FIBS_NotYourTurnToMove, regex: RegExp(r"^\\*\\* It's not your turn to move\\.")),
-    CookieDough(cookie: FibsCookie.FIBS_YouStopWatching, regex: RegExp(r"^\\*\\* You stop watching")),
-    CookieDough(cookie: FibsCookie.FIBS_UnknownCommand, regex: RegExp(r"^\\*\\* Unknown command: (?<command>.*)$")),
+    CookieDough(cookie: FibsCookie.FIBS_YouStopWatching, regex: RegExp(r'^\\*\\* You stop watching')),
+    CookieDough(cookie: FibsCookie.FIBS_UnknownCommand, regex: RegExp(r'^\\*\\* Unknown command: (?<command>.*)$')),
     CookieDough(
         cookie: FibsCookie.FIBS_CantWatch,
         regex: RegExp(r"^\\*\\* You can't watch another game while you're playing\\.")),
     CookieDough(cookie: FibsCookie.FIBS_CantInviteSelf, regex: RegExp(r"^\\*\\* You can't invite yourself\\.")),
     CookieDough(cookie: FibsCookie.FIBS_DontKnowUser, regex: RegExp(r"^\\*\\* Don't know user")),
-    CookieDough(cookie: FibsCookie.FIBS_MessageUsage, regex: RegExp(r"^\\*\\* usage: message <user> <text>")),
-    CookieDough(cookie: FibsCookie.FIBS_PlayerNotPlaying, regex: RegExp(r"^\\*\\* [a-zA-Z_<>]+ is not playing\\.")),
+    CookieDough(cookie: FibsCookie.FIBS_MessageUsage, regex: RegExp(r'^\\*\\* usage: message <user> <text>')),
+    CookieDough(cookie: FibsCookie.FIBS_PlayerNotPlaying, regex: RegExp(r'^\\*\\* [a-zA-Z_<>]+ is not playing\\.')),
     CookieDough(cookie: FibsCookie.FIBS_CantTalk, regex: RegExp(r"^\\*\\* You can't talk if you won't listen\\.")),
     CookieDough(cookie: FibsCookie.FIBS_WontListen, regex: RegExp(r"^\\*\\* [a-zA-Z_<>]+ won't listen to you\\.")),
     CookieDough(
         cookie: FibsCookie.FIBS_Why,
-        regex: RegExp(r"Why would you want to do that")), // (not sure about ** vs *** at front of line.)
-    CookieDough(cookie: FibsCookie.FIBS_Ratings, regex: RegExp(r"^\\* *[0-9]+ +[a-zA-Z_<>]+ +[0-9]+\\.[0-9]+ +[0-9]+")),
+        regex: RegExp(r'Why would you want to do that')), // (not sure about ** vs *** at front of line.)
+    CookieDough(cookie: FibsCookie.FIBS_Ratings, regex: RegExp(r'^\\* *[0-9]+ +[a-zA-Z_<>]+ +[0-9]+\\.[0-9]+ +[0-9]+')),
     CookieDough(cookie: FibsCookie.FIBS_NoSavedMatch, regex: RegExp(r"^\\*\\* There's no saved match with ")),
     CookieDough(
         cookie: FibsCookie.FIBS_WARNINGSavedMatch,
@@ -760,7 +760,7 @@ class CookieMonster {
     CookieDough(
         cookie: FibsCookie.FIBS_SettingsValue,
         regex: RegExp(r"^\\*\\* You're not away\\."),
-        extras: {"name": "away", "value": "NO"}),
+        extras: {'name': 'away', 'value': 'NO'}),
   ];
 
   // for LOGIN_STATE
