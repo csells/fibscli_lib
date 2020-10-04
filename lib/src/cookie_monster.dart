@@ -38,7 +38,6 @@
  * http://github.com/csells/fibscli
  */
 
-import 'package:logging/logging.dart';
 import 'package:meta/meta.dart';
 import 'package:quiver/strings.dart';
 
@@ -74,6 +73,8 @@ class CookieMonster {
   CookieMonsterState oldMessageState;
 
   static CookieMessage makeCookie(List<CookieDough> batch, String raw, CookieMonsterState eatState) {
+    assert(!raw.contains('\n'));
+    
     for (final dough in batch) {
       var match = dough.regex.firstMatch(raw);
       if (match != null) {
@@ -165,19 +166,23 @@ class CookieMonster {
 
     // output the initial state if no state has been shown at all
     if (oldMessageState == null) {
-      Logger.root.log(Level.FINE, 'State= $eatState');
+      // Logger.root.log(Level.FINE, 'State= $eatState');
+      print('State= $eatState');
       oldMessageState = eatState;
     }
 
-    Logger.root.log(Level.FINE, "${cm.cookie}: '${cm.raw}'");
+    // Logger.root.log(Level.FINE, 'State= $eatState');
+    print('State= $eatState');
     if (cm.crumbs != null) {
       final crumbs = cm.crumbs.keys.map((key) => '$key= ${cm.crumbs[key]}').join(', ');
-      Logger.root.log(Level.FINE, '\t$crumbs');
+      // Logger.root.log(Level.FINE, '\t$crumbs');
+      print('\t$crumbs');
     }
 
     // output the new state as soon as we transition
     if (oldMessageState != messageState) {
-      Logger.root.log(Level.FINE, 'State= $messageState');
+      // Logger.root.log(Level.FINE, 'State= $messageState');
+      print('State= $messageState');
       oldMessageState = messageState;
     }
 
