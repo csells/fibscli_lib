@@ -38,6 +38,7 @@
  * http://github.com/csells/fibscli
  */
 
+import 'package:logging/logging.dart';
 import 'package:meta/meta.dart';
 import 'package:quiver/strings.dart';
 
@@ -101,87 +102,88 @@ class CookieMonster {
     return null;
   }
 
-  // // Returns a cookie message
-  // // NOTE: The incoming FIBS message should NOT include line terminators.
-  // public CookieMessage EatCookie(string raw) {
-  //   var eatState = MessageState;
-  //   CookieMessage cm = null;
+  // Returns a cookie message
+  // NOTE: The incoming FIBS message should NOT include line terminators.
+  CookieMessage eatCookie(String raw) {
+    var eatState = messageState;
+    CookieMessage cm;
 
-  //   switch (MessageState) {
-  //     case States.FIBS_RUN_STATE:
-  //       if (string.IsNullOrEmpty(raw)) {
-  //         cm = new CookieMessage(FibsCookie.FIBS_Empty, raw, null, eatState);
-  //         break;
-  //       }
+    switch (messageState) {
+      case CookieMonsterState.FIBS_RUN_STATE:
+        if (raw == null || raw.isEmpty) {
+          cm = CookieMessage(FibsCookie.FIBS_Empty, raw, null, eatState);
+          break;
+        }
 
-  //       char ch = raw[0];
-  //       // CLIP messages and miscellaneous numeric messages
-  //       if (char.IsDigit(ch)) {
-  //         cm = MakeCookie(NumericBatch, raw, eatState);
-  //       }
-  //       // '** ' messages
-  //       else if (ch == '*') {
-  //         cm = MakeCookie(StarsBatch, raw, eatState);
-  //       }
-  //       // all other messages
-  //       else {
-  //         cm = MakeCookie(AlphaBatch, raw, eatState);
-  //       }
+        final s0 = raw.substring(0, 1);
+        // CLIP messages and miscellaneous numeric messages
+        if (isDigit(s0.codeUnitAt(0))) {
+          cm = MakeCookie(numericBatch, raw, eatState);
+        }
+        // '** ' messages
+        else if (s0 == '*') {
+          cm = MakeCookie(starsBatch, raw, eatState);
+        }
+        // all other messages
+        else {
+          cm = MakeCookie(alphaBatch, raw, eatState);
+        }
 
-  //       if (cm != null && cm.Cookie == FibsCookie.FIBS_Goodbye) {
-  //         MessageState = States.FIBS_LOGOUT_STATE;
-  //       }
-  //       break;
+        if (cm != null && cm.cookie == FibsCookie.FIBS_Goodbye) {
+          messageState = CookieMonsterState.FIBS_LOGOUT_STATE;
+        }
+        break;
 
-  //     case States.FIBS_LOGIN_STATE:
-  //       cm = MakeCookie(LoginBatch, raw, eatState);
-  //       Debug.Assert(cm != null); // there's a catch all
-  //       if (cm.Cookie == FibsCookie.CLIP_MOTD_BEGIN) {
-  //         MessageState = States.FIBS_MOTD_STATE;
-  //       }
-  //       break;
+      case CookieMonsterState.FIBS_LOGIN_STATE:
+        cm = MakeCookie(loginBatch, raw, eatState);
+        assert(cm != null); // there's a catch all
+        if (cm.cookie == FibsCookie.CLIP_MOTD_BEGIN) {
+          messageState = CookieMonsterState.FIBS_MOTD_STATE;
+        }
+        break;
 
-  //     case States.FIBS_MOTD_STATE:
-  //       cm = MakeCookie(MOTDBatch, raw, eatState);
-  //       Debug.Assert(cm != null); // there's a catch all
-  //       if (cm.Cookie == FibsCookie.CLIP_MOTD_END) {
-  //         MessageState = States.FIBS_RUN_STATE;
-  //       }
-  //       break;
+      case CookieMonsterState.FIBS_MOTD_STATE:
+        cm = MakeCookie(motdBatch, raw, eatState);
+        assert(cm != null); // there's a catch all
+        if (cm.cookie == FibsCookie.CLIP_MOTD_END) {
+          messageState = CookieMonsterState.FIBS_RUN_STATE;
+        }
+        break;
 
-  //     case States.FIBS_LOGOUT_STATE:
-  //       cm = new CookieMessage(FibsCookie.FIBS_PostGoodbye, raw, new Dictionary<string, string> { { "message", raw } }, eatState);
-  //       break;
+      case CookieMonsterState.FIBS_LOGOUT_STATE:
+        cm = CookieMessage(FibsCookie.FIBS_PostGoodbye, raw, {'message': raw}, eatState);
+        break;
 
-  //     default:
-  //       throw new System.Exception($"Unknown state: {MessageState}");
-  //   }
+      default:
+        throw Exception('Unknown state: $messageState');
+    }
 
-  //   if (cm == null) { cm = new CookieMessage(FibsCookie.FIBS_Unknown, raw, new Dictionary<string, string> { { "raw", raw } }, eatState); }
+    cm ??= CookieMessage(FibsCookie.FIBS_Unknown, raw, {'raw': raw}, eatState);
 
-  //   // output the initial state if no state has been shown at all
-  //   if (OldMessageState == null) {
-  //     Debug.WriteLine($"State= {eatState}");
-  //     OldMessageState = eatState;
-  //   }
+    // output the initial state if no state has been shown at all
+    if (oldMessageState == null) {
+      Logger.root.log(Level.FINE, 'State= $eatState');
+      oldMessageState = eatState;
+    }
 
-  //   Debug.WriteLine($"{cm.Cookie}: '{cm.Raw}'");
-  //   if (cm.Crumbs != null) {
-  //     var crumbs = string.Join(", ", cm.Crumbs.Select(kvp => $"{kvp.Key}= {kvp.Value}"));
-  //     Debug.WriteLine($"\t{crumbs}");
-  //   }
+    Logger.root.log(Level.FINE, "${cm.cookie}: '${cm.raw}'");
+    if (cm.crumbs != null) {
+      final crumbs = cm.crumbs.keys.map((key) => '$key= ${cm.crumbs[key]}').join(', ');
+      Logger.root.log(Level.FINE, '\t$crumbs');
+    }
 
-  //   // output the new state as soon as we transition
-  //   if (OldMessageState != MessageState) {
-  //     Debug.WriteLine($"State= {MessageState}");
-  //     OldMessageState = MessageState;
-  //   }
+    // output the new state as soon as we transition
+    if (oldMessageState != messageState) {
+      Logger.root.log(Level.FINE, 'State= $messageState');
+      oldMessageState = messageState;
+    }
 
-  //   return cm;
-  // }
+    return cm;
+  }
 
   // "-" returned as null
   static String parseOptional(String s) => s.trim() == '-' ? null : s;
+
   static bool parseBool(String s) => s == '1' || s == 'YES';
   static String parseBoardTurn(String s) => parseTurnColor(int.parse(s));
   static String parseBoardColorInt(int i) => i == -1 ? 'X' : 'O';
