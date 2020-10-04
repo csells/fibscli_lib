@@ -9,7 +9,7 @@ void main() {
   final pass = 'chris1';
 
   final conn = FibsConnection(proxy, port);
-  conn.stream.listen((s) => print(s));
+  conn.stream.listen((cm) => print(cm));
   conn.login(user, pass);
 
   stdin.transform(utf8.decoder).transform(LineSplitter()).listen((cmd) {

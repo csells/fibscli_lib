@@ -1,17 +1,18 @@
 import 'dart:async';
-
+import 'package:fibscli_lib/src/cookie_monster.dart';
 import 'package:socket_io_client/socket_io_client.dart' as ws;
 
 class FibsConnection {
   final String proxy;
   final int port;
-  final _controller = StreamController<String>();
+  final _controller = StreamController<CookieMessage>();
   ws.Socket _socket;
   var _loggedIn = false;
+  final _monster = CookieMonster();
   FibsConnection(this.proxy, this.port);
 
   bool get connected => _socket != null;
-  Stream<String> get stream => _controller.stream;
+  Stream<CookieMessage> get stream => _controller.stream;
 
   void login(String user, String pass) {
     assert(!connected);
@@ -61,7 +62,10 @@ class FibsConnection {
   void _receive(String event, String message) {
     // TODO: turn into cookie messages and notify the client
     // print(message == null || message.isEmpty ? event : '$event: $message');
-    if (event == 'stream') _controller.add(message);
+    if (event == 'stream') {
+      final cm = _monster.eatCookie(message);
+      _controller.add(cm);
+    }
   }
 
   void close() {

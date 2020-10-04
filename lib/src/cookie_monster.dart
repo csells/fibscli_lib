@@ -52,6 +52,9 @@ class CookieMessage {
       :
         // Cannot have zero-length crumb dictionary. Pass null instead.
         assert(crumbs == null || crumbs.isNotEmpty);
+
+  @override
+  String toString() => '{cookie: $cookie, crumbs: $crumbs, eatState: $eatState}';
 }
 
 // A simple state model
