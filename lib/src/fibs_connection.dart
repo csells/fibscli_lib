@@ -62,9 +62,10 @@ class FibsConnection {
   }
 
   void close() {
-    assert(_socket != null);
-    _socket.close();
-    _socket = null;
-    _controller.done;
+    if (_socket != null) {
+      _socket.close();
+      _socket = null;
+      _controller.done;
+    }
   }
 }
