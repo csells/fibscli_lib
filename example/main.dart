@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:fibscli_lib/fibscli_lib.dart';
 // import 'package:logging/logging.dart';
 
-void main() {
+void main() async {
   // Logger.root.level = Level.ALL; // defaults to Level.INFO
   // Logger.root.onRecord.listen((record) {
   //   print('${record.level.name}: ${record.time}: ${record.message}');
@@ -16,7 +16,11 @@ void main() {
 
   final conn = FibsConnection(proxy, port);
   // conn.stream.listen((cm) => print(cm));
-  conn.login(user, pass);
+  final cookie = await conn.login(user, pass);
+  if (cookie != FibsCookie.CLIP_WELCOME) {
+    print('error: login failed: $cookie');
+    exit(-1);
+  }
 
   stdin.transform(utf8.decoder).transform(LineSplitter()).listen((cmd) {
     print('connected: ${conn.connected}');
