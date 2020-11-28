@@ -31,13 +31,13 @@ class FibsConnection {
       'forceNew': true,
     });
 
-    _socket.on('connect', (data) {
-      _receive('connect', data);
+    _socket.on('connect', (dynamic data) {
+      _receive('connect', data as String);
       _socket.emit('stream', '\n');
     });
 
-    _socket.on('stream', (bytes) async {
-      final s = String.fromCharCodes(bytes);
+    _socket.on('stream', (dynamic bytes) async {
+      final s = String.fromCharCodes(bytes as List<int>);
       final cms = _receive('stream', s).toList();
 
       switch (_loginState) {
@@ -70,8 +70,8 @@ class FibsConnection {
       }
     });
 
-    _socket.on('status', (status) {
-      _receive('status', status);
+    _socket.on('status', (dynamic status) {
+      _receive('status', status as String);
       if (status == 'Telnet disconnected.\n') close();
     });
 
