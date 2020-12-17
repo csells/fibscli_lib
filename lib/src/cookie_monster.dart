@@ -563,7 +563,7 @@ class CookieMonster {
     _CookieDough(
         cookie: FibsCookie.FIBS_NewMatchAck2,
         re: RegExp(
-            r'^\*\* Player [a-zA-Z_<>]+ has joined you for a')), // ** Player PLAYER has joined you for a 2 point match.
+            r'^\*\* Player (?<name>[a-zA-Z_<>]+) has joined you for a (?<points>[0-9]+) point match')), // ** Player PLAYER has joined you for a 2 point match.
     _CookieDough(cookie: FibsCookie.FIBS_YouTerminated, re: RegExp(r'^\*\* You terminated the game')),
     _CookieDough(
         cookie: FibsCookie.FIBS_OpponentLeftGame,
