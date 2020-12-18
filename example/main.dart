@@ -9,7 +9,7 @@ void main() async {
   final pass = 'chris1';
 
   final conn = FibsConnection(proxy, port);
-  conn.stream.listen((cm) => print(cm));
+  conn.stream.listen((cm) => print(cm), onDone: () => exit(0));
   final cookie = await conn.login(user, pass);
   if (cookie != FibsCookie.CLIP_WELCOME) {
     print('error: login failed: $cookie');
@@ -18,10 +18,7 @@ void main() async {
 
   stdin.transform(utf8.decoder).transform(LineSplitter()).listen((cmd) {
     print('connected: ${conn.connected}');
-    if (conn.connected) {
-      conn.send(cmd);
-    } else {
-      exit(0);
-    }
+    assert(conn.connected);
+    conn.send(cmd);
   });
 }
