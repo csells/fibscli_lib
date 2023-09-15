@@ -38,13 +38,12 @@
  * http://github.com/csells/fibscli
  */
 
-import 'package:meta/meta.dart';
 import 'package:quiver/strings.dart';
 
 class CookieMessage {
   final FibsCookie cookie;
   final String raw;
-  Map<String, String> crumbs;
+  Map<String, String>? crumbs;
   final CookieMonsterState eatState;
 
   CookieMessage(this.cookie, this.raw, this.crumbs, this.eatState)
@@ -64,15 +63,15 @@ enum CookieMonsterState { FIBS_LOGIN_STATE, FIBS_MOTD_STATE, FIBS_RUN_STATE, FIB
 class _CookieDough {
   final FibsCookie cookie;
   final RegExp re;
-  final Map<String, String> extras;
-  _CookieDough({@required this.cookie, @required this.re, this.extras});
+  final Map<String, String>? extras;
+  _CookieDough({required this.cookie, required this.re, this.extras});
 }
 
 class CookieMonster {
   CookieMonsterState messageState = CookieMonsterState.FIBS_LOGIN_STATE;
-  CookieMonsterState oldMessageState;
+  CookieMonsterState? oldMessageState;
 
-  static CookieMessage makeCookie(List<_CookieDough> batch, String raw, CookieMonsterState eatState) {
+  static CookieMessage? makeCookie(List<_CookieDough> batch, String raw, CookieMonsterState eatState) {
     assert(!raw.contains('\n'));
 
     for (final dough in batch) {
@@ -81,20 +80,20 @@ class CookieMonster {
         var crumbs = <String, String>{};
         var namedGroups = match.groupNames.where((n) => !isDigit(n.codeUnitAt(0)));
         for (final name in namedGroups) {
-          var value = match.namedGroup(name).trim();
+          var value = match.namedGroup(name)!.trim();
           crumbs[name] = value;
 
           // only "message" values are allowed to be empty
-          assert((name == 'message') || !(value == null || value.isEmpty), '${dough.cookie}: missing crumb "$name"');
+          assert((name == 'message') || !(value.isEmpty), '${dough.cookie}: missing crumb "$name"');
         }
 
         // drop in hard-coded extra name-value pairs
         if (dough.extras != null) {
-          for (final pair in dough.extras.entries) {
+          for (final pair in dough.extras!.entries) {
             crumbs[pair.key] = pair.value;
 
             // only "message" values are allowed to be empty
-            assert((pair.key == 'message') || !(pair.value == null || pair.value.isEmpty),
+            assert((pair.key == 'message') || !(pair.value.isEmpty),
                 '${dough.cookie}: missing crumb "{pair.Key}"');
           }
         }
@@ -110,11 +109,11 @@ class CookieMonster {
   // NOTE: The incoming FIBS message should NOT include line terminators.
   CookieMessage eatCookie(String raw) {
     var eatState = messageState;
-    CookieMessage cm;
+    CookieMessage? cm;
 
     switch (messageState) {
       case CookieMonsterState.FIBS_RUN_STATE:
-        if (raw == null || raw.isEmpty) {
+        if (raw.isEmpty) {
           cm = CookieMessage(FibsCookie.FIBS_Empty, raw, null, eatState);
           break;
         }
@@ -141,7 +140,7 @@ class CookieMonster {
       case CookieMonsterState.FIBS_LOGIN_STATE:
         cm = makeCookie(loginBatch, raw, eatState);
         assert(cm != null); // there's a catch all
-        if (cm.cookie == FibsCookie.CLIP_MOTD_BEGIN) {
+        if (cm!.cookie == FibsCookie.CLIP_MOTD_BEGIN) {
           messageState = CookieMonsterState.FIBS_MOTD_STATE;
         }
         break;
@@ -149,7 +148,7 @@ class CookieMonster {
       case CookieMonsterState.FIBS_MOTD_STATE:
         cm = makeCookie(motdBatch, raw, eatState);
         assert(cm != null); // there's a catch all
-        if (cm.cookie == FibsCookie.CLIP_MOTD_END) {
+        if (cm!.cookie == FibsCookie.CLIP_MOTD_END) {
           messageState = CookieMonsterState.FIBS_RUN_STATE;
         }
         break;
@@ -191,17 +190,17 @@ class CookieMonster {
   }
 
   // "-" returned as null
-  static String parseOptional(String s) => s.trim() == '-' ? null : s;
+  static String? parseOptional(String s) => s.trim() == '-' ? null : s;
 
-  static bool parseBool(String s) => s == '1' || s == 'YES';
-  static String parseBoardTurn(String s) => parseTurnColor(int.parse(s));
+  static bool parseBool(String? s) => s == '1' || s == 'YES';
+  static String? parseBoardTurn(String s) => parseTurnColor(int.parse(s));
   static String parseBoardColorInt(int i) => i == -1 ? 'X' : 'O';
   static String parseBoardColorString(String s) => parseBoardColorInt(int.parse(s));
 
   static DateTime parseTimestamp(String timestamp) =>
       DateTime(1970, 1, 1, 0, 0, 0).add(Duration(seconds: int.parse(timestamp)));
 
-  static String parseTurnColor(int i) {
+  static String? parseTurnColor(int i) {
     if (i == -1) {
       return 'X';
     } else if (i == 1) {

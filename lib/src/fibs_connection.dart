@@ -15,10 +15,10 @@ class FibsConnection {
   final String proxy;
   final int port;
   final _streamController = StreamController<CookieMessage>();
-  IOWebSocketChannel _channel;
+  IOWebSocketChannel? _channel;
   final _monster = CookieMonster();
-  Completer<FibsCookie> _loginCompleter;
-  _LoginState _loginState;
+  Completer<FibsCookie>? _loginCompleter;
+  _LoginState? _loginState;
 
   FibsConnection(this.proxy, this.port);
 
@@ -30,7 +30,7 @@ class FibsConnection {
 
     _channel = IOWebSocketChannel.connect('ws://$proxy:$port');
 
-    _channel.stream.listen(
+    _channel!.stream.listen(
       (dynamic bytes) {
         final message = String.fromCharCodes(bytes as Uint8List);
         print('stream.message: $message');
@@ -40,7 +40,10 @@ class FibsConnection {
           case _LoginState.prelogin:
             // wait for login prompt
             final expecting = [FibsCookie.FIBS_LoginPrompt];
-            final found = cms.map((cm) => cm.cookie).where((c) => expecting.contains(c)).toList();
+            final found = cms
+                .map((cm) => cm.cookie)
+                .where((c) => expecting.contains(c))
+                .toList();
             if (found.isEmpty) return; // wait for next batch
 
             // send credentials
@@ -50,18 +53,26 @@ class FibsConnection {
 
           case _LoginState.sentcred:
             // wait for login prompt
-            final expecting = [FibsCookie.CLIP_WELCOME, FibsCookie.FIBS_FailedLogin, FibsCookie.FIBS_LoginPrompt];
-            final found = cms.map((cm) => cm.cookie).where((c) => expecting.contains(c)).toList();
+            final expecting = [
+              FibsCookie.CLIP_WELCOME,
+              FibsCookie.FIBS_FailedLogin,
+              FibsCookie.FIBS_LoginPrompt
+            ];
+            final found = cms
+                .map((cm) => cm.cookie)
+                .where((c) => expecting.contains(c))
+                .toList();
             if (found.isEmpty) return; // wait for next batch
 
             // complete the login
             final cookie = found.single;
-            _loginCompleter.complete(cookie);
+            _loginCompleter!.complete(cookie);
             _loginCompleter = null;
             _loginState = _LoginState.postlogin;
             break;
 
           case _LoginState.postlogin:
+          case null:
             break;
         }
       },
@@ -78,14 +89,14 @@ class FibsConnection {
 
     _loginState = _LoginState.prelogin;
     _loginCompleter = Completer<FibsCookie>();
-    return _loginCompleter.future;
+    return _loginCompleter!.future;
   }
 
   void send(String s) {
     assert(connected);
     assert(!s.endsWith('\n'));
     print('SEND: $s');
-    _channel.sink.add('$s\n');
+    _channel!.sink.add('$s\n');
   }
 
   Iterable<CookieMessage> _receive(String message) sync* {
@@ -94,7 +105,6 @@ class FibsConnection {
     final lines = message.split('\n');
     for (final line in lines) {
       final cm = _monster.eatCookie(line.replaceAll('\r', ''));
-      assert(cm != null);
       _streamController.add(cm);
       yield cm;
     }
@@ -102,7 +112,7 @@ class FibsConnection {
 
   void close() {
     if (_channel != null) {
-      _channel.sink.close();
+      _channel!.sink.close();
       _channel = null;
       _streamController.close();
     }
