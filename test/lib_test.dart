@@ -1,3 +1,5 @@
+// ignore_for_file: lines_longer_than_80_chars
+
 import 'package:fibscli_lib/src/cookie_monster.dart';
 import 'package:test/test.dart';
 
@@ -11,14 +13,14 @@ void main() {
 
   test('FIBS_WARNINGAlreadyLoggedIn', () {
     final monster = CookieMonster();
-    final s = '** Warning: You are already logged in.';
+    const s = '** Warning: You are already logged in.';
     final cm = monster.eatCookie(s);
     expect(cm.cookie, FibsCookie.FIBS_WARNINGAlreadyLoggedIn);
   });
 
   test('FIBS_UnknownCommand', () {
     final monster = createLoggedInCookieMonster();
-    final s = "** Unknown command: 'fizzbuzz'";
+    const s = "** Unknown command: 'fizzbuzz'";
     final cm = monster.eatCookie(s);
     expect(cm.cookie, FibsCookie.FIBS_UnknownCommand);
     expect(cm.crumbs!['command'], "'fizzbuzz'");
@@ -26,19 +28,20 @@ void main() {
 
   test('CLIP_WELCOME', () {
     final monster = CookieMonster();
-    final s = '1 myself 1041253132 192.168.1.308';
+    const s = '1 myself 1041253132 192.168.1.308';
     final cm = monster.eatCookie(s);
 
     expect(cm.cookie, FibsCookie.CLIP_WELCOME);
     expect(cm.crumbs!['name'], 'myself');
-    var lastLogin = CookieMonster.parseTimestamp(cm.crumbs!['lastLogin']!);
+    final lastLogin = CookieMonster.parseTimestamp(cm.crumbs!['lastLogin']!);
     expect(lastLogin, DateTime.parse('2002-12-30 12:58:52'));
     expect(cm.crumbs!['lastHost'], '192.168.1.308');
   });
 
   test('CLIP_OWN_INFO', () {
     final monster = CookieMonster();
-    final s = '2 myself 1 1 0 0 0 0 1 1 2396 0 1 0 1 3457.85 0 0 0 0 0 Australia/Melbourne';
+    const s =
+        '2 myself 1 1 0 0 0 0 1 1 2396 0 1 0 1 3457.85 0 0 0 0 0 Australia/Melbourne';
     final cm = monster.eatCookie(s);
 
     expect(cm.cookie, FibsCookie.CLIP_OWN_INFO);
@@ -67,7 +70,7 @@ void main() {
 
   test('CLIP_MOTD_BEGIN', () {
     final monster = CookieMonster();
-    final s = '3';
+    const s = '3';
     final cm = monster.eatCookie(s);
     expect(FibsCookie.CLIP_MOTD_BEGIN, cm.cookie);
   });
@@ -75,7 +78,8 @@ void main() {
   test('FIBS_MOTD1', () {
     final monster = CookieMonster();
     monster.eatCookie('3');
-    final s = '+--------------------------------------------------------------------+';
+    const s =
+        '+--------------------------------------------------------------------+';
     final cm = monster.eatCookie(s);
     expect(FibsCookie.FIBS_MOTD, cm.cookie);
     expect(s, cm.raw);
@@ -84,7 +88,8 @@ void main() {
   test('FIBS_MOTD2', () {
     final monster = CookieMonster();
     monster.eatCookie('3');
-    final s = '| It was a dark and stormy night in Oakland.  Outside, the rain      |';
+    const s =
+        '| It was a dark and stormy night in Oakland.  Outside, the rain      |';
     final cm = monster.eatCookie(s);
     expect(FibsCookie.FIBS_MOTD, cm.cookie);
     expect(s, cm.raw);
@@ -93,14 +98,14 @@ void main() {
   test('CLIP_MOTD_END', () {
     final monster = CookieMonster();
     monster.eatCookie('3');
-    final s = '4';
+    const s = '4';
     final cm = monster.eatCookie(s);
     expect(FibsCookie.CLIP_MOTD_END, cm.cookie);
   });
 
   test('CLIP_WHO_INFO', () {
     final monster = createLoggedInCookieMonster();
-    final s =
+    const s =
         '5 someplayer mgnu_advanced - 0 0 1418.61 23 1914 1041253132 192.168.40.3 MacFIBS someplayer@somewhere.com';
     final cm = monster.eatCookie(s);
 
@@ -113,22 +118,24 @@ void main() {
     expect(double.parse(cm.crumbs!['rating']!), 1418.61);
     expect(23, int.parse(cm.crumbs!['experience']!));
     expect(1914, int.parse(cm.crumbs!['idle']!));
-    expect(DateTime.parse('2002-12-30 12:58:52'), CookieMonster.parseTimestamp(cm.crumbs!['login']!));
+    expect(DateTime.parse('2002-12-30 12:58:52'),
+        CookieMonster.parseTimestamp(cm.crumbs!['login']!));
     expect('192.168.40.3', cm.crumbs!['hostName']);
     expect('MacFIBS', CookieMonster.parseOptional(cm.crumbs!['client']!));
-    expect('someplayer@somewhere.com', CookieMonster.parseOptional(cm.crumbs!['email']!));
+    expect('someplayer@somewhere.com',
+        CookieMonster.parseOptional(cm.crumbs!['email']!));
   });
 
   test('CLIP_WHO_END', () {
     final monster = createLoggedInCookieMonster();
-    final s = '6';
+    const s = '6';
     final cm = monster.eatCookie(s);
     expect(FibsCookie.CLIP_WHO_END, cm.cookie);
   });
 
   test('CLIP_LOGIN', () {
     final monster = createLoggedInCookieMonster();
-    final s = '7 someplayer someplayer logs in.';
+    const s = '7 someplayer someplayer logs in.';
     final cm = monster.eatCookie(s);
     expect(FibsCookie.CLIP_LOGIN, cm.cookie);
     expect('someplayer', cm.crumbs!['name']);
@@ -137,7 +144,7 @@ void main() {
 
   test('CLIP_LOGOUT', () {
     final monster = createLoggedInCookieMonster();
-    final s = '8 someplayer someplayer drops connection.';
+    const s = '8 someplayer someplayer drops connection.';
     final cm = monster.eatCookie(s);
     expect(FibsCookie.CLIP_LOGOUT, cm.cookie);
     expect('someplayer', cm.crumbs!['name']);
@@ -146,17 +153,20 @@ void main() {
 
   test('CLIP_MESSAGE', () {
     final monster = createLoggedInCookieMonster();
-    final s = "9 someplayer 1041253132 I'll log in at 10pm if you want to finish that game.";
+    const s =
+        "9 someplayer 1041253132 I'll log in at 10pm if you want to finish that game.";
     final cm = monster.eatCookie(s);
     expect(FibsCookie.CLIP_MESSAGE, cm.cookie);
     expect('someplayer', cm.crumbs!['from']);
-    expect(DateTime.parse('2002-12-30 12:58:52'), CookieMonster.parseTimestamp(cm.crumbs!['time']!));
-    expect("I'll log in at 10pm if you want to finish that game.", cm.crumbs!['message']);
+    expect(DateTime.parse('2002-12-30 12:58:52'),
+        CookieMonster.parseTimestamp(cm.crumbs!['time']!));
+    expect("I'll log in at 10pm if you want to finish that game.",
+        cm.crumbs!['message']);
   });
 
   test('CLIP_MESSAGE_DELIVERED', () {
     final monster = createLoggedInCookieMonster();
-    final s = '10 someplayer';
+    const s = '10 someplayer';
     final cm = monster.eatCookie(s);
     expect(FibsCookie.CLIP_MESSAGE_DELIVERED, cm.cookie);
     expect('someplayer', cm.crumbs!['name']);
@@ -164,7 +174,7 @@ void main() {
 
   test('CLIP_MESSAGE_SAVED', () {
     final monster = createLoggedInCookieMonster();
-    final s = '11 someplayer';
+    const s = '11 someplayer';
     final cm = monster.eatCookie(s);
     expect(FibsCookie.CLIP_MESSAGE_SAVED, cm.cookie);
     expect('someplayer', cm.crumbs!['name']);
@@ -172,7 +182,7 @@ void main() {
 
   test('CLIP_SAYS', () {
     final monster = createLoggedInCookieMonster();
-    final s = '12 someplayer Do you want to play a game?';
+    const s = '12 someplayer Do you want to play a game?';
     final cm = monster.eatCookie(s);
     expect(FibsCookie.CLIP_SAYS, cm.cookie);
     expect('someplayer', cm.crumbs!['name']);
@@ -181,7 +191,7 @@ void main() {
 
   test('CLIP_SHOUTS', () {
     final monster = createLoggedInCookieMonster();
-    final s = '13 someplayer Anybody for a 5 point match?';
+    const s = '13 someplayer Anybody for a 5 point match?';
     final cm = monster.eatCookie(s);
     expect(FibsCookie.CLIP_SHOUTS, cm.cookie);
     expect('someplayer', cm.crumbs!['name']);
@@ -190,7 +200,7 @@ void main() {
 
   test('CLIP_WHISPERS', () {
     final monster = createLoggedInCookieMonster();
-    final s = '14 someplayer I think he is using loaded dice :-)';
+    const s = '14 someplayer I think he is using loaded dice :-)';
     final cm = monster.eatCookie(s);
     expect(FibsCookie.CLIP_WHISPERS, cm.cookie);
     expect('someplayer', cm.crumbs!['name']);
@@ -199,16 +209,17 @@ void main() {
 
   test('CLIP_KIBITZES', () {
     final monster = createLoggedInCookieMonster();
-    final s = "15 someplayer G'Day and good luck from Hobart, Australia.";
+    const s = "15 someplayer G'Day and good luck from Hobart, Australia.";
     final cm = monster.eatCookie(s);
     expect(FibsCookie.CLIP_KIBITZES, cm.cookie);
     expect('someplayer', cm.crumbs!['name']);
-    expect("G'Day and good luck from Hobart, Australia.", cm.crumbs!['message']);
+    expect(
+        "G'Day and good luck from Hobart, Australia.", cm.crumbs!['message']);
   });
 
   test('CLIP_YOU_SAY', () {
     final monster = createLoggedInCookieMonster();
-    final s = "16 someplayer What's this \"G'Day\" stuff you hick? :-)";
+    const s = "16 someplayer What's this \"G'Day\" stuff you hick? :-)";
     final cm = monster.eatCookie(s);
     expect(FibsCookie.CLIP_YOU_SAY, cm.cookie);
     expect('someplayer', cm.crumbs!['name']);
@@ -217,23 +228,25 @@ void main() {
 
   test('CLIP_YOU_SHOUT', () {
     final monster = createLoggedInCookieMonster();
-    final s = "17 Watch out for someplayer.  He's a Tasmanian.";
+    const s = "17 Watch out for someplayer.  He's a Tasmanian.";
     final cm = monster.eatCookie(s);
     expect(FibsCookie.CLIP_YOU_SHOUT, cm.cookie);
-    expect("Watch out for someplayer.  He's a Tasmanian.", cm.crumbs!['message']);
+    expect(
+        "Watch out for someplayer.  He's a Tasmanian.", cm.crumbs!['message']);
   });
 
   test('CLIP_YOU_WHISPER', () {
     final monster = createLoggedInCookieMonster();
-    final s = '18 Hello and hope you enjoy watching this game.';
+    const s = '18 Hello and hope you enjoy watching this game.';
     final cm = monster.eatCookie(s);
     expect(FibsCookie.CLIP_YOU_WHISPER, cm.cookie);
-    expect('Hello and hope you enjoy watching this game.', cm.crumbs!['message']);
+    expect(
+        'Hello and hope you enjoy watching this game.', cm.crumbs!['message']);
   });
 
   test('CLIP_YOU_KIBITZ', () {
     final monster = createLoggedInCookieMonster();
-    final s = "19 Are you sure those dice aren't loaded?";
+    const s = "19 Are you sure those dice aren't loaded?";
     final cm = monster.eatCookie(s);
     expect(FibsCookie.CLIP_YOU_KIBITZ, cm.cookie);
     expect("Are you sure those dice aren't loaded?", cm.crumbs!['message']);
@@ -241,7 +254,7 @@ void main() {
 
   test('FIBS_Unknown', () {
     final monster = createLoggedInCookieMonster();
-    final s = 'something sump something';
+    const s = 'something sump something';
     final cm = monster.eatCookie(s);
     expect(FibsCookie.FIBS_Unknown, cm.cookie);
     expect('something sump something', cm.crumbs!['raw']);
@@ -249,7 +262,7 @@ void main() {
 
   test('FIBS_PlayerLeftGame', () {
     final monster = createLoggedInCookieMonster();
-    final s = 'bob has left the game with alice.';
+    const s = 'bob has left the game with alice.';
     final cm = monster.eatCookie(s);
     expect(FibsCookie.FIBS_PlayerLeftGame, cm.cookie);
     expect('bob', cm.crumbs!['player1']);
@@ -258,7 +271,8 @@ void main() {
 
   test('FIBS_PreLogin', () {
     final monster = CookieMonster();
-    final s = 'Saturday, October 15 17:01:02 MEST   ( Sat Oct 15 15:01:02 2016 UTC )';
+    const s =
+        'Saturday, October 15 17:01:02 MEST   ( Sat Oct 15 15:01:02 2016 UTC )';
     final cm = monster.eatCookie(s);
     expect(FibsCookie.FIBS_PreLogin, cm.cookie);
     expect(s, cm.crumbs!['message']);
@@ -266,7 +280,7 @@ void main() {
 
   test('FIBS_Goodbye', () {
     final monster = createLoggedInCookieMonster();
-    final s = '           Goodbye.';
+    const s = '           Goodbye.';
     final cm = monster.eatCookie(s);
     expect(FibsCookie.FIBS_Goodbye, cm.cookie);
     expect('Goodbye.', cm.crumbs!['message']);
@@ -275,7 +289,7 @@ void main() {
   test('FIBS_PostGoodbye', () {
     final monster = createLoggedInCookieMonster();
     monster.eatCookie('           Goodbye.');
-    final s = 'If you enjoyed using this server please send picture postcards,';
+    const s = 'If you enjoyed using this server please send picture postcards,';
     final cm = monster.eatCookie(s);
     expect(FibsCookie.FIBS_PostGoodbye, cm.cookie);
     expect(s, cm.crumbs!['message']);
@@ -283,7 +297,7 @@ void main() {
 
   test('FIBS_MatchResult', () {
     final monster = createLoggedInCookieMonster();
-    final s = 'BlunderBot wins a 1 point match against LunaRossa  1-0 .';
+    const s = 'BlunderBot wins a 1 point match against LunaRossa  1-0 .';
     final cm = monster.eatCookie(s);
     expect(FibsCookie.FIBS_MatchResult, cm.cookie);
     expect('BlunderBot', cm.crumbs!['winner']);
@@ -295,7 +309,7 @@ void main() {
 
   test('FIBS_PlayersStartingMatch', () {
     final monster = createLoggedInCookieMonster();
-    final s = 'BlunderBot_IV and eggieegg start a 1 point match.';
+    const s = 'BlunderBot_IV and eggieegg start a 1 point match.';
     final cm = monster.eatCookie(s);
     expect(FibsCookie.FIBS_PlayersStartingMatch, cm.cookie);
     expect('BlunderBot_IV', cm.crumbs!['player1']);
@@ -305,7 +319,7 @@ void main() {
 
   test('FIBS_ResumingLimitedMatch', () {
     final monster = createLoggedInCookieMonster();
-    final s = 'inim and utah are resuming their 2-point match.';
+    const s = 'inim and utah are resuming their 2-point match.';
     final cm = monster.eatCookie(s);
     expect(FibsCookie.FIBS_ResumingLimitedMatch, cm.cookie);
     expect('inim', cm.crumbs!['player1']);
@@ -315,7 +329,7 @@ void main() {
 
   test('FIBS_NoOne', () {
     final monster = createLoggedInCookieMonster();
-    final s = '** There is no one called playerOne.';
+    const s = '** There is no one called playerOne.';
     final cm = monster.eatCookie(s);
     expect(FibsCookie.FIBS_NoOne, cm.cookie);
     expect('playerOne', cm.crumbs!['name']);
@@ -323,7 +337,7 @@ void main() {
 
   test('FIBS_SettingsValueYes', () {
     final monster = createLoggedInCookieMonster();
-    final s = 'allowpip        YES';
+    const s = 'allowpip        YES';
     final cm = monster.eatCookie(s);
     expect(FibsCookie.FIBS_SettingsValue, cm.cookie);
     expect('allowpip', cm.crumbs!['name']);
@@ -332,7 +346,7 @@ void main() {
 
   test('FIBS_SettingsValueNo', () {
     final monster = createLoggedInCookieMonster();
-    final s = 'autodouble      NO';
+    const s = 'autodouble      NO';
     final cm = monster.eatCookie(s);
     expect(FibsCookie.FIBS_SettingsValue, cm.cookie);
     expect('autodouble', cm.crumbs!['name']);
@@ -341,7 +355,7 @@ void main() {
 
   test('FIBS_SettingsYoureNotAway', () {
     final monster = createLoggedInCookieMonster();
-    final s = "** You're not away.";
+    const s = "** You're not away.";
     final cm = monster.eatCookie(s);
     expect(FibsCookie.FIBS_SettingsValue, cm.cookie);
     expect('away', cm.crumbs!['name']);
@@ -353,10 +367,12 @@ void main() {
     final settingPhrases = {
       'allowpip': "** You allow the use the server's 'pip' command.",
       'autoboard': '** The board will be refreshed after every move.',
-      'autodouble': '** You agree that doublets during opening double the cube.',
+      'autodouble':
+          '** You agree that doublets during opening double the cube.',
       'automove': '** Forced moves will be done automatically.',
       'away': "You're away. Please type 'back'",
-      'bell': '** Your terminal will ring the bell if someone talks to you or invites you',
+      'bell':
+          '** Your terminal will ring the bell if someone talks to you or invites you',
       'crawford': '** You insist on playing with the Crawford rule.',
       'double': '** You will be asked if you want to double.',
       'greedy': '** Will use automatic greedy bearoffs.',
@@ -375,19 +391,24 @@ void main() {
       final cm = monster.eatCookie(pair.value);
       expect(FibsCookie.FIBS_SettingsChange, cm.cookie);
       expect(pair.key, cm.crumbs!['name']);
-      expect(true, CookieMonster.parseBool(cm.crumbs!['value'])); //, $"{cm.crumbs["name"]}= {cm.crumbs["value"]}");
+      expect(
+          true,
+          CookieMonster.parseBool(cm.crumbs![
+              'value'])); //, $"{cm.crumbs["name"]}= {cm.crumbs["value"]}");
     }
   });
 
   test('FIBS_SettingsValueChangeToNo', () {
     final monster = createLoggedInCookieMonster();
-    var settingPhrases = {
+    final settingPhrases = {
       'allowpip': "** You don't allow the use of the server's 'pip' command.",
       'autoboard': "** The board won't be refreshed after every move.",
-      'autodouble': "** You don't agree that doublets during opening double the cube.",
+      'autodouble':
+          "** You don't agree that doublets during opening double the cube.",
       'automove': "** Forced moves won't be done automatically.",
       'away': 'Welcome back.',
-      'bell': "** Your terminal won't ring the bell if someone talks to you or invites you",
+      'bell': "** Your terminal won't ring the bell if someone talks to you "
+          'or invites you',
       'crawford': '** You would like to play without using the Crawford rule.',
       'double': "** You won't be asked if you want to double.",
       'greedy': "** Won't use automatic greedy bearoffs.",
@@ -398,7 +419,8 @@ void main() {
       'ready': "** You're now refusing to play with someone.",
       'report': "** You won't be informed about starting and ending matches.",
       'silent': "** You won't hear what other players shout.",
-      'telnet': "** You use a client program and will receive extra 'newlines'.",
+      'telnet':
+          "** You use a client program and will receive extra 'newlines'.",
       'wrap': '** Your terminal knows how to wrap long lines.',
     };
 
@@ -406,13 +428,16 @@ void main() {
       final cm = monster.eatCookie(pair.value);
       expect(FibsCookie.FIBS_SettingsChange, cm.cookie);
       expect(pair.key, cm.crumbs!['name']);
-      expect(false, CookieMonster.parseBool(cm.crumbs!['value'])); //, $"{cm.crumbs["name"]}= {cm.crumbs["value"]}");
+      expect(
+          false,
+          CookieMonster.parseBool(cm.crumbs![
+              'value'])); //, $"{cm.crumbs["name"]}= {cm.crumbs["value"]}");
     }
   });
 
   test('FIBS_RedoublesChangeToNone', () {
     final monster = createLoggedInCookieMonster();
-    final s = "Value of 'redoubles' set to 'none'.";
+    const s = "Value of 'redoubles' set to 'none'.";
     final cm = monster.eatCookie(s);
     expect(FibsCookie.FIBS_SettingsChange, cm.cookie);
     expect('redoubles', cm.crumbs!['name']);
@@ -421,7 +446,7 @@ void main() {
 
   test('FIBS_RedoublesChangeToNumber', () {
     final monster = createLoggedInCookieMonster();
-    final s = "Value of 'redoubles' set to 42.";
+    const s = "Value of 'redoubles' set to 42.";
     final cm = monster.eatCookie(s);
     expect(FibsCookie.FIBS_SettingsChange, cm.cookie);
     expect('redoubles', cm.crumbs!['name']);
@@ -430,7 +455,7 @@ void main() {
 
   test('FIBS_RedoublesChangeToUnlimited', () {
     final monster = createLoggedInCookieMonster();
-    final s = "Value of 'redoubles' set to 'unlimited'.";
+    const s = "Value of 'redoubles' set to 'unlimited'.";
     final cm = monster.eatCookie(s);
     expect(FibsCookie.FIBS_SettingsChange, cm.cookie);
     expect('redoubles', cm.crumbs!['name']);
@@ -439,7 +464,7 @@ void main() {
 
   test('FIBS_TimezoneChange', () {
     final monster = createLoggedInCookieMonster();
-    final s = "Value of 'timezone' set to America/Los_Angeles.";
+    const s = "Value of 'timezone' set to America/Los_Angeles.";
     final cm = monster.eatCookie(s);
     expect(FibsCookie.FIBS_SettingsChange, cm.cookie);
     expect('timezone', cm.crumbs!['name']);
@@ -449,7 +474,7 @@ void main() {
   test('FIBS_Board', () {
     // from http://www.fibs.com/fibs_interface.html#board_state
     final monster = createLoggedInCookieMonster();
-    final s =
+    const s =
         'board:You:someplayer:3:0:1:0:-2:0:0:0:0:5:0:3:0:0:0:-5:5:0:0:0:-3:0:-5:0:0:0:0:2:0:1:6:2:0:0:1:1:1:0:1:-1:0:25:0:0:0:0:2:0:0:0';
     final cm = monster.eatCookie(s);
     expect(FibsCookie.FIBS_Board, cm.cookie);
@@ -458,7 +483,8 @@ void main() {
     expect(3, int.parse(cm.crumbs!['matchLength']!));
     expect(0, int.parse(cm.crumbs!['player1Score']!));
     expect(1, int.parse(cm.crumbs!['player2Score']!));
-    expect('0:-2:0:0:0:0:5:0:3:0:0:0:-5:5:0:0:0:-3:0:-5:0:0:0:0:2:0', cm.crumbs!['board']);
+    expect('0:-2:0:0:0:0:5:0:3:0:0:0:-5:5:0:0:0:-3:0:-5:0:0:0:0:2:0',
+        cm.crumbs!['board']);
     expect('O', CookieMonster.parseBoardTurn(cm.crumbs!['turnColor']!));
     expect('6:2', cm.crumbs!['player1Dice']);
     expect('0:0', cm.crumbs!['player2Dice']);
@@ -466,7 +492,8 @@ void main() {
     expect(true, CookieMonster.parseBool(cm.crumbs!['player1MayDouble']));
     expect(true, CookieMonster.parseBool(cm.crumbs!['player2MayDouble']));
     expect(false, CookieMonster.parseBool(cm.crumbs!['wasDoubled']));
-    expect('O', CookieMonster.parseBoardColorString(cm.crumbs!['player1Color']!));
+    expect(
+        'O', CookieMonster.parseBoardColorString(cm.crumbs!['player1Color']!));
     expect(-1, int.parse(cm.crumbs!['direction']!));
     expect(0, int.parse(cm.crumbs!['player1Home']!));
     expect(0, int.parse(cm.crumbs!['player2Home']!));
@@ -551,7 +578,7 @@ void main() {
 
   test('FIBS_YouAreWatching', () {
     final monster = createLoggedInCookieMonster();
-    final s = "You're now watching bonehead.";
+    const s = "You're now watching bonehead.";
     final cm = monster.eatCookie(s);
     expect(FibsCookie.FIBS_YouAreWatching, cm.cookie);
     expect('bonehead', cm.crumbs!['name']);
@@ -559,7 +586,7 @@ void main() {
 
   test('FIBS_YouStopWatching', () {
     final monster = createLoggedInCookieMonster();
-    final s = 'You stop watching bonehead.';
+    const s = 'You stop watching bonehead.';
     final cm = monster.eatCookie(s);
     expect(FibsCookie.FIBS_YouStopWatching, cm.cookie);
     expect('bonehead', cm.crumbs!['name']);
@@ -567,7 +594,7 @@ void main() {
 
   test('FIBS_NotDoingAnything', () {
     final monster = createLoggedInCookieMonster();
-    final s = 'bonehead is not doing anything interesting.';
+    const s = 'bonehead is not doing anything interesting.';
     final cm = monster.eatCookie(s);
     expect(FibsCookie.FIBS_NotDoingAnything, cm.cookie);
     expect('bonehead', cm.crumbs!['name']);
@@ -575,7 +602,7 @@ void main() {
 
   test('FIBS_PlayerMoves4', () {
     final monster = createLoggedInCookieMonster();
-    final s = 'Tyke moves 19-23 19-23 20-24 20-24 .';
+    const s = 'Tyke moves 19-23 19-23 20-24 20-24 .';
     final cm = monster.eatCookie(s);
     expect(FibsCookie.FIBS_PlayerMoves, cm.cookie);
     expect('Tyke', cm.crumbs!['player']);
@@ -584,7 +611,7 @@ void main() {
 
   test('FIBS_PlayerMoves1', () {
     final monster = createLoggedInCookieMonster();
-    final s = 'Tyke moves 19-23 .';
+    const s = 'Tyke moves 19-23 .';
     final cm = monster.eatCookie(s);
     expect(FibsCookie.FIBS_PlayerMoves, cm.cookie);
     expect('Tyke', cm.crumbs!['player']);
@@ -593,7 +620,7 @@ void main() {
 
   test('FIBS_PlayerMoves2', () {
     final monster = createLoggedInCookieMonster();
-    final s = 'Tyke moves 19-23 19-23 .';
+    const s = 'Tyke moves 19-23 19-23 .';
     final cm = monster.eatCookie(s);
     expect(FibsCookie.FIBS_PlayerMoves, cm.cookie);
     expect('Tyke', cm.crumbs!['player']);
@@ -602,7 +629,7 @@ void main() {
 
   test('FIBS_PlayerMoves3', () {
     final monster = createLoggedInCookieMonster();
-    final s = 'Tyke moves 19-23 19-23 20-24 .';
+    const s = 'Tyke moves 19-23 19-23 20-24 .';
     final cm = monster.eatCookie(s);
     expect(FibsCookie.FIBS_PlayerMoves, cm.cookie);
     expect('Tyke', cm.crumbs!['player']);
@@ -611,7 +638,7 @@ void main() {
 
   test('FIBS_PlayerCantMove', () {
     final monster = createLoggedInCookieMonster();
-    final s = "smilingeyes can't move.";
+    const s = "smilingeyes can't move.";
     final cm = monster.eatCookie(s);
     expect(FibsCookie.FIBS_PlayerCantMove, cm.cookie);
     expect('smilingeyes', cm.crumbs!['player']);
