@@ -1,42 +1,42 @@
 // From http://www.fibs.com/fcm/
 // FIBS Client Protocol Detailed Specification: http://www.fibs.com/fibs_interface.html
-// ignore_for_file: public_member_api_docs, constant_identifier_names, unnecessary_string_escapes, lines_longer_than_80_chars
+// ignore_for_file: public_member_api_docs, constant_identifier_names
 
 /*
  *---  FIBSCookieMonster.c --------------------------------------------------
  *
- *  Created by Paul Ferguson on Tue Dec 24 2002.
- *  Copyright (c) 2003 Paul Ferguson. All rights reserved.
+ *  Created by Paul Ferguson on Tue Dec 24 2002. Copyright (c) 2003 Paul
+ *  Ferguson. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  *
- * * Redistributions of source code must retain the above copyright notice,
- *   this list of conditions and the following disclaimer.
+ * * Redistributions of source code must retain the above copyright notice, this
+ *   list of conditions and the following disclaimer.
  *
- * * Redistributions in binary form must reproduce the above copyright
- *   notice, this list of conditions and the following disclaimer in the
- *   documentation and/or other materials provided with the distribution.
+ * * Redistributions in binary form must reproduce the above copyright notice,
+ *   this list of conditions and the following disclaimer in the documentation
+ *   and/or other materials provided with the distribution.
  *
- * * The name of Paul D. Ferguson may not be used to endorse or promote
- *   products derived from this software without specific prior written permission.
+ * * The name of Paul D. Ferguson may not be used to endorse or promote products
+ *   derived from this software without specific prior written permission.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
- * IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
- * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
- * PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER
- * OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
- * LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- * NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE
+ * LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
  *
  *---------------------------------------------------------------------------
- * Oct, 2016, csells ported this to C# as part of Fibs.Net, added some useful features
- * http://github.com/csells/fibs.net
- * Oct, 2020, csells ported this to Dart as part of a FIBS Backgammon client for Flutter
+ * Oct, 2016, csells ported this to C# as part of Fibs.Net, added some useful
+ * features http://github.com/csells/fibs.net Oct, 2020, csells ported this to
+ * Dart as part of a FIBS Backgammon client for Flutter
  * http://github.com/csells/fibscli
  */
 
@@ -166,6 +166,10 @@ class CookieMonster {
       case CookieMonsterState.FIBS_LOGOUT_STATE:
         cm = CookieMessage(
             FibsCookie.FIBS_PostGoodbye, raw, {'message': raw}, eatState);
+
+      // ignore: no_default_cases
+      default:
+        throw Exception('Unknown state: $messageState');
     }
 
     cm ??= CookieMessage(FibsCookie.FIBS_Unknown, raw, {'raw': raw}, eatState);
@@ -181,8 +185,8 @@ class CookieMonster {
     // Logger.root.log(Level.FINE, 'State= $eatState');
     // print('State= $eatState');
     // if (cm.crumbs != null) {
-    // final crumbs = cm.crumbs.keys.map((key) =>
-    //  '$key= ${cm.crumbs[key]}').join(', ');
+    // final crumbs = cm.crumbs.keys.map(
+    //  (key) => '$key= ${cm.crumbs[key]}').join(', ');
     // Logger.root.log(Level.FINE, '\t$crumbs');
     // print('\t$crumbs');
     // }
@@ -287,16 +291,16 @@ class CookieMonster {
     _CookieDough(
       cookie: FibsCookie.FIBS_YouStopWatching,
       re: RegExp(
-          "(?<name>[a-zA-Z_<>]+) logs out\. You're not watching anymore\."),
+          r"(?<name>[a-zA-Z_<>]+) logs out\. You're not watching anymore\."),
     ), // overloaded	//PLAYER logs out. You're not watching anymore.
     _CookieDough(
       cookie: FibsCookie.FIBS_OpponentLogsOut,
-      re: RegExp('^(?<opponent>[a-zA-Z_<>]+) logs out\. The game was saved'),
+      re: RegExp(r'^(?<opponent>[a-zA-Z_<>]+) logs out\. The game was saved'),
     ), // PLAYER logs out. The game was saved.
     _CookieDough(
       cookie: FibsCookie.FIBS_OpponentLogsOut,
       re: RegExp(
-          '^(?<opponent>[a-zA-Z_<>]+) drops connection\. The game was saved'),
+          r'^(?<opponent>[a-zA-Z_<>]+) drops connection\. The game was saved'),
     ), // PLAYER drops connection. The game was saved.
     _CookieDough(
       cookie: FibsCookie.FIBS_OnlyPossibleMove,
@@ -305,7 +309,8 @@ class CookieMonster {
     _CookieDough(
       cookie: FibsCookie.FIBS_FirstRoll,
       re: RegExp(
-          '(?<opponent>[a-zA-Z_<>]+) rolled (?<opponentDie>[1-6]).+rolled (?<yourDie>[1-6])'),
+          '(?<opponent>[a-zA-Z_<>]+) rolled (?<opponentDie>[1-6]).+rolled '
+          '(?<yourDie>[1-6])'),
     ),
     _CookieDough(
       cookie: FibsCookie.FIBS_MakesFirstMove,
@@ -314,22 +319,22 @@ class CookieMonster {
     _CookieDough(
       cookie: FibsCookie.FIBS_YouDouble,
       re: RegExp(
-          '^You double\. Please wait for (?<opponent>[a-zA-Z_<>]+) to accept or reject'),
+          r'^You double\. Please wait for (?<opponent>[a-zA-Z_<>]+) to accept or reject'),
     ), // You double. Please wait for PLAYER to accept or reject.
     _CookieDough(
       cookie: FibsCookie.FIBS_PlayerWantsToResign,
       re: RegExp(
-          "^(?<opponent>[a-zA-Z_<>]+) wants to resign\. You will win (?<points>[0-9]+) points?\. Type 'accept' or 'reject'\."),
+          r"^(?<opponent>[a-zA-Z_<>]+) wants to resign\. You will win (?<points>[0-9]+) points?\. Type 'accept' or 'reject'\."),
     ),
     _CookieDough(
       cookie: FibsCookie.FIBS_WatchResign,
-      re: RegExp(
-          '^(?<player1>[a-zA-Z_<>]+) wants to resign\. (?<player2>[a-zA-Z_<>]+) will win (?<points>[0-9]+) points'),
-    ), // PLAYER wants to resign. PLAYER2 will win 2 points.  (ORDER MATTERS HERE)
+      re: RegExp(r'^(?<player1>[a-zA-Z_<>]+) wants to resign\. '
+          '(?<player2>[a-zA-Z_<>]+) will win (?<points>[0-9]+) points'),
+    ), // PLAYER wants to resign. PLAYER2 will win 2 points.  (ORDER MATTERS)
     _CookieDough(
       cookie: FibsCookie.FIBS_YouResign,
-      re: RegExp(
-          '^You want to resign. (?<opponent>[a-zA-Z_<>]+) will win (?<points>[0-9]+)'),
+      re: RegExp('^You want to resign. (?<opponent>[a-zA-Z_<>]+) will win '
+          '(?<points>[0-9]+)'),
     ), // You want to resign. PLAYER will win 1 .
     _CookieDough(
       cookie: FibsCookie.FIBS_ResumeMatchAck5,
@@ -394,13 +399,13 @@ class CookieMonster {
     ),
     _CookieDough(
       cookie: FibsCookie.FIBS_PlayerLeftGame,
-      re: RegExp(
-          '(?<player1>[a-zA-Z_<>]+) has left the game with (?<player2>[a-zA-Z_<>]+)'),
+      re: RegExp('(?<player1>[a-zA-Z_<>]+) has left the game with '
+          '(?<player2>[a-zA-Z_<>]+)'),
     ),
     _CookieDough(
       cookie: FibsCookie.FIBS_ResignWins,
       re: RegExp(
-          '^(?<player1>[a-zA-Z_<>]+) gives up\. (?<player2>[a-zA-Z_<>]+) wins (?<points>[0-9]+) points?'),
+          r'^(?<player1>[a-zA-Z_<>]+) gives up\. (?<player2>[a-zA-Z_<>]+) wins (?<points>[0-9]+) points?'),
     ), // PLAYER1 gives up. PLAYER2 wins 1 point.
     _CookieDough(
       cookie: FibsCookie.FIBS_ResignYouWin,
@@ -414,12 +419,14 @@ class CookieMonster {
     _CookieDough(
       cookie: FibsCookie.FIBS_AcceptWins,
       re: RegExp(
-          '^(?<opponent>[a-zA-Z_<>]+) accepts and wins (?<points>[0-9]+) point'),
+          '^(?<opponent>[a-zA-Z_<>]+) accepts and wins (?<points>[0-9]+) '
+          'point'),
     ), // PLAYER accepts and wins N points.
     _CookieDough(
       cookie: FibsCookie.FIBS_PlayersStartingMatch,
       re: RegExp(
-          '^(?<player1>[a-zA-Z_<>]+) and (?<player2>[a-zA-Z_<>]+) start a (?<points>[0-9]+) point match'),
+          '^(?<player1>[a-zA-Z_<>]+) and (?<player2>[a-zA-Z_<>]+) start a '
+          '(?<points>[0-9]+) point match'),
     ), // PLAYER and PLAYER start a <n> point match.
     _CookieDough(
       cookie: FibsCookie.FIBS_StartingNewGame,
@@ -431,13 +438,14 @@ class CookieMonster {
     ),
     _CookieDough(
       cookie: FibsCookie.FIBS_YouWinMatch,
-      re: RegExp(
-          '^You win the (?<points>[0-9]+) point match (?<winnerScore>[0-9]+)-(?<loserScore>[0-9]+)'),
+      re: RegExp('^You win the (?<points>[0-9]+) point match '
+          '(?<winnerScore>[0-9]+)-(?<loserScore>[0-9]+)'),
     ),
     _CookieDough(
       cookie: FibsCookie.FIBS_PlayerWinsMatch,
       re: RegExp(
-          '^(?<opponent>[a-zA-Z_<>]+) wins the (?<points>[0-9]+) point match (?<winnerScore>[0-9]+)-(?<loserScore>[0-9]+)'),
+          '^(?<opponent>[a-zA-Z_<>]+) wins the (?<points>[0-9]+) point match '
+          '(?<winnerScore>[0-9]+)-(?<loserScore>[0-9]+)'),
     ), //PLAYER wins the 3 point match 3-0 .
     _CookieDough(
       cookie: FibsCookie.FIBS_ResumingUnlimitedMatch,
@@ -447,16 +455,18 @@ class CookieMonster {
     _CookieDough(
       cookie: FibsCookie.FIBS_ResumingLimitedMatch,
       re: RegExp(
-          '^(?<player1>[a-zA-Z_<>]+) and (?<player2>[a-zA-Z_<>]+) are resuming their (?<points>[0-9]+)-point match\.'),
+          r'^(?<player1>[a-zA-Z_<>]+) and (?<player2>[a-zA-Z_<>]+) are resuming their (?<points>[0-9]+)-point match\.'),
     ),
     _CookieDough(
       cookie: FibsCookie.FIBS_MatchResult,
       re: RegExp(
-          '^(?<winner>[a-zA-Z_<>]+) wins a (?<points>[0-9]+) point match against (?<loser>[a-zA-Z_<>]+) +(?<winnerScore>[0-9]+)-(?<loserScore>[0-9]+)'),
+          '^(?<winner>[a-zA-Z_<>]+) wins a (?<points>[0-9]+) point match '
+          'against (?<loser>[a-zA-Z_<>]+) '
+          '+(?<winnerScore>[0-9]+)-(?<loserScore>[0-9]+)'),
     ), //PLAYER wins a 9 point match against PLAYER  11-6 .
     _CookieDough(
       cookie: FibsCookie.FIBS_PlayerWantsToResign,
-      re: RegExp('^(?<name>[a-zA-Z_<>]+) wants to resign\.'),
+      re: RegExp(r'^(?<name>[a-zA-Z_<>]+) wants to resign\.'),
     ), //  Same as a longline in an actual game  This is just for watching.
     _CookieDough(
       cookie: FibsCookie.FIBS_BAD_AcceptDouble,
@@ -498,23 +508,25 @@ class CookieMonster {
     _CookieDough(
       cookie: FibsCookie.FIBS_PlayerWinsGame,
       re: RegExp(
-          '^(?<opponent>[a-zA-Z_<>]+) wins the game and gets (?<points>[0-9]+) points?. Sorry'),
+          '^(?<opponent>[a-zA-Z_<>]+) wins the game and gets (?<points>[0-9]+) '
+          'points?. Sorry'),
     ),
     // CookieDough (cookie: FibsCookie.FIBS_PlayerWinsGame, regex: RegExp(r"^[a-zA-Z_<>]+ wins the game and gets [0-9] points?."),), // (when watching)
     _CookieDough(
       cookie: FibsCookie.FIBS_WatchGameWins,
-      re: RegExp(
-          '^(?<name>[a-zA-Z_<>]+) wins the game and gets (?<points>[0-9]+) points'),
+      re: RegExp('^(?<name>[a-zA-Z_<>]+) wins the game and gets '
+          '(?<points>[0-9]+) points'),
     ),
     _CookieDough(
       cookie: FibsCookie.FIBS_PlayersStartingUnlimitedMatch,
       re: RegExp(
-          '^(?<player1>[a-zA-Z_<>]+) and (?<player2>[a-zA-Z_<>]+) start an unlimited match'),
+          '^(?<player1>[a-zA-Z_<>]+) and (?<player2>[a-zA-Z_<>]+) start an '
+          'unlimited match'),
     ), // PLAYER_A and PLAYER_B start an unlimited match.
     _CookieDough(
       cookie: FibsCookie.FIBS_ReportLimitedMatch,
-      re: RegExp(
-          '^(?<player1>[a-zA-Z_<>]+) +- +(?<player2>[a-zA-Z_<>]+) (?<points>[0-9]+) point match (?<score1>[0-9]+)-(?<score2>[0-9]+)'),
+      re: RegExp('^(?<player1>[a-zA-Z_<>]+) +- +(?<player2>[a-zA-Z_<>]+) '
+          '(?<points>[0-9]+) point match (?<score1>[0-9]+)-(?<score2>[0-9]+)'),
     ), // PLAYER_A        -       PLAYER_B (5 point match 2-2)
     _CookieDough(
       cookie: FibsCookie.FIBS_ReportUnlimitedMatch,
@@ -566,7 +578,9 @@ class CookieMonster {
     _CookieDough(
       cookie: FibsCookie.FIBS_SettingsValue,
       re: RegExp(
-          '^(?<name>allowpip|autoboard|autodouble|automove|bell|crawford|double|moreboards|moves|greedy|notify|ratings|ready|report|silent|telnet|wrap) +(?<value>YES|NO)'),
+          '^(?<name>allowpip|autoboard|autodouble|automove|bell|crawford|double'
+          '|moreboards|moves|greedy|notify|ratings|ready|report|silent|telnet|'
+          'wrap) +(?<value>YES|NO)'),
     ),
     _CookieDough(
       cookie: FibsCookie.FIBS_Turn,
@@ -611,8 +625,8 @@ class CookieMonster {
     ),
     _CookieDough(
       cookie: FibsCookie.FIBS_SettingsChange,
-      re: RegExp(
-          "^Value of '(?<name>sortwho)' set to (?<value>login|name|rating|rrating)"),
+      re: RegExp("^Value of '(?<name>sortwho)' set to "
+          '(?<value>login|name|rating|rrating)'),
     ),
     _CookieDough(
       cookie: FibsCookie.FIBS_SettingsValue,
@@ -665,13 +679,15 @@ class CookieMonster {
     _CookieDough(
       cookie: FibsCookie.FIBS_SavedMatch,
       re: RegExp(
-          '^  (?<player1>[a-zA-Z_<>]+) +(?<score1>[0-9]+) +(?<score2>[0-9]+) +- +(?<something>.*)'),
+          '^  (?<player1>[a-zA-Z_<>]+) +(?<score1>[0-9]+) +(?<score2>[0-9]+) '
+          '+- +(?<something>.*)'),
     ),
     _CookieDough(
       cookie: FibsCookie.FIBS_SavedMatchPlaying,
       re: RegExp(r'^ \*[a-zA-Z_<>]+ +[0-9]+ +[0-9]+ +- +'),
     ),
-    // NOTE: for FIBS_SavedMatchReady, see the Stars message, because it will appear to be one of those (has asterisk at index 0).
+    // NOTE: for FIBS_SavedMatchReady, see the Stars message, because it will
+    // appear to be one of those (has asterisk at index 0).
     _CookieDough(
       cookie: FibsCookie.FIBS_PlayerIsWaitingForYou,
       re: RegExp(r'^[a-zA-Z_<>]+ is waiting for you to log in\.'),
@@ -1191,7 +1207,7 @@ class CookieMonster {
     _CookieDough(
       cookie: FibsCookie.FIBS_SavedMatchReady,
       re: RegExp(r'^\*\*[a-zA-Z_<>]+ +[0-9]+ +[0-9]+ +- +[0-9]+'),
-    ), // double star before a name indicates you have a saved game with this player
+    ), // double star before a name indicates a saved game with this player
     _CookieDough(
       cookie: FibsCookie.FIBS_NotYourTurnToRoll,
       re: RegExp(r"^\*\* It's not your turn to roll the dice\."),
@@ -1303,8 +1319,8 @@ class CookieMonster {
         re: catchAllIntoMessageRegex), // catch all
   ];
 
-  // Only interested in one message here, but we still use a message list for simplicity and consistency.
-  // for MOTD_STATE
+  // Only interested in one message here, but we still use a message list for
+  // simplicity and consistency. for MOTD_STATE
   static final motdBatch = [
     _CookieDough(
       cookie: FibsCookie.CLIP_MOTD_END,
@@ -1348,7 +1364,7 @@ enum FibsCookie {
   FIBS_Empty, // empty string
   FIBS_Junk, // a message we don't care about, but is not unknown
   FIBS_ClearScreen,
-  FIBS_BAD_AcceptDouble, // DANGER, WILL ROBINSON!!! See notes in .c file about these two cookies!
+  FIBS_BAD_AcceptDouble, // DANGER! See notes in .c file about these 2 cookies!
   FIBS_Average,
   FIBS_DiceTest,
   FIBS_Stat,
