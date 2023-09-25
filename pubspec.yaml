@@ -1,5 +1,6 @@
 name: fibscli_lib
 description: low-level Dart client library for FIBS
+version: 0.1.0
 
 environment:
   sdk: ">=3.1.2 <4.0.0"
