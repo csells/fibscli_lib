@@ -166,10 +166,6 @@ class CookieMonster {
       case CookieMonsterState.FIBS_LOGOUT_STATE:
         cm = CookieMessage(
             FibsCookie.FIBS_PostGoodbye, raw, {'message': raw}, eatState);
-
-      // ignore: no_default_cases
-      default:
-        throw Exception('Unknown state: $messageState');
     }
 
     cm ??= CookieMessage(FibsCookie.FIBS_Unknown, raw, {'raw': raw}, eatState);

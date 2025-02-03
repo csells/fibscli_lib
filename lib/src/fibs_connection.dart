@@ -64,7 +64,7 @@ class FibsConnection {
         switch (_loginState) {
           case _LoginState.prelogin:
             // wait for login prompt
-            final expecting = [FibsCookie.FIBS_LoginPrompt];
+            final expecting = <FibsCookie>[FibsCookie.FIBS_LoginPrompt];
             final found =
                 cms.map((cm) => cm.cookie).where(expecting.contains).toList();
             if (found.isEmpty) return; // wait for next batch
@@ -75,7 +75,7 @@ class FibsConnection {
 
           case _LoginState.sentcred:
             // wait for login prompt
-            final expecting = [
+            final expecting = <FibsCookie>[
               FibsCookie.CLIP_WELCOME,
               FibsCookie.FIBS_FailedLogin,
               FibsCookie.FIBS_LoginPrompt
